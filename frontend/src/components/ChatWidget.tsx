@@ -127,7 +127,7 @@ export default function ChatWidget() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs font-bold text-slate-900">Carefolio Copilot</h3>
+                  <h3 className="text-xs font-bold text-slate-900">MED DEV COPILOT</h3>
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 </div>
                 <p className="text-[10px] text-slate-500 font-medium">Empathetic health assistant</p>
@@ -220,7 +220,7 @@ export default function ChatWidget() {
                     )}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1 opacity-80 text-[10px]">
-                      <span className="font-bold">{isAI ? 'Carefolio Copilot' : m.sender_name}</span>
+                      <span className="font-bold">{isAI ? 'MED DEV COPILOT' : m.sender_name}</span>
                       <span>
                         {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
@@ -319,7 +319,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="group relative flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/25 hover:bg-blue-700 hover:scale-102 active:scale-98 transition-all duration-200"
-        title="Open Carefolio Health Copilot"
+        title="Open MED DEV COPILOT"
       >
         <span className="relative flex items-center justify-center">
           <Bot size={20} className="group-hover:rotate-6 transition-transform" />
@@ -327,7 +327,7 @@ export default function ChatWidget() {
           <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-blue-600" />
         </span>
         <span className="hidden sm:inline text-xs font-bold tracking-tight">
-          Ask Carefolio AI
+          Ask MED DEV COPILOT
         </span>
       </button>
     </div>

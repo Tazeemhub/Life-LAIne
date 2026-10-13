@@ -1,7 +1,7 @@
 @echo off
-title Life-LAIne Launcher
+title MED DEV COPILOT Launcher
 echo ========================================================
-echo        Starting Life-LAIne Services
+echo        Starting MED DEV COPILOT Services
 echo ========================================================
 
 powershell -NoProfile -Command "$ports = @(8000, 5173); foreach ($p in $ports) { $conns = Get-NetTCPConnection -LocalPort $p -ErrorAction SilentlyContinue; if ($conns) { $conns | Select-Object -ExpandProperty OwningProcess -Unique | ForEach-Object { if ($_ -gt 0) { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue } } } }"

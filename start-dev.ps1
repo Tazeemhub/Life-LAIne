@@ -1,6 +1,6 @@
-# Life-LAIne PowerShell Launcher
+# MED DEV COPILOT PowerShell Launcher
 Write-Host "========================================================" -ForegroundColor Cyan
-Write-Host "         Starting Life-LAIne AI Health Copilot         " -ForegroundColor Cyan
+Write-Host "         Starting MED DEV COPILOT Platform             " -ForegroundColor Cyan
 Write-Host "========================================================" -ForegroundColor Cyan
 
 $root = $PSScriptRoot

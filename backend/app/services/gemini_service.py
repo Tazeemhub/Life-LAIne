@@ -110,7 +110,7 @@ class GeminiService:
             data_str = str(extracted)
 
         prompt = (
-            f"You are a compassionate, clear AI Health Copilot. Your job is to explain complex clinical paperwork "
+            f"You are a compassionate, clear AI MED DEV COPILOT. Your job is to explain complex clinical paperwork "
             f"to a patient in simple, reassuring, 8th-grade reading level plain language in {target_lang}.\n\n"
             "Structure your explanation with numbered sections:\n"
             "1. Overview — Brief summary of what this document is (Prescription, Lab Report, or Discharge Summary).\n"
@@ -219,7 +219,7 @@ class GeminiService:
         )
 
         prompt = (
-            f"You are the HealthCopilot AI Companion, an empathetic, world-class medical and emotional well-being assistant "
+            f"You are the MED DEV COPILOT AI Companion, an empathetic, world-class medical and emotional well-being assistant "
             f"(designed just like ChatGPT and Google Gemini, but specialized in compassionate healthcare communication).\n\n"
             f"CONTEXT:\n"
             f"- Role Context: {role_context}\n"

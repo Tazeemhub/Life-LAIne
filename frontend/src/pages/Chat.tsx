@@ -229,7 +229,7 @@ export default function Chat() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                Carefolio Health Companion
+                MED DEV COPILOT Companion
                 <span className="text-[10px] bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full border border-blue-200 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                   Gemini 2.5 Flash
@@ -390,7 +390,7 @@ export default function Chat() {
                         </div>
                       )}
                       <span className="font-extrabold tracking-tight">
-                        {isAI ? 'Carefolio AI' : m.sender_name}
+                        {isAI ? 'MED DEV COPILOT' : m.sender_name}
                       </span>
                       {isDoc && (
                         <span className="text-[10px] bg-indigo-100 text-indigo-800 px-1.5 py-0.2 rounded border border-indigo-200 font-bold">
@@ -461,7 +461,7 @@ export default function Chat() {
                   <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '150ms' }} />
                   <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
-                <span className="text-xs text-slate-500 font-semibold">Carefolio is thinking...</span>
+                <span className="text-xs text-slate-500 font-semibold">MED DEV COPILOT is thinking...</span>
               </div>
             </div>
           )}

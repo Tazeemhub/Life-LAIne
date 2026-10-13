@@ -45,7 +45,7 @@ export default function Home() {
         <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-1.5 mb-6 shadow-2xs">
           <Sparkles size={14} className="text-blue-600" />
           <span className="text-xs font-semibold text-blue-800">
-            Carefolio Health · Powered by Gemini AI & Cloud Firestore
+            MED DEV COPILOT · Powered by Gemini AI & Cloud Firestore
           </span>
         </div>
 

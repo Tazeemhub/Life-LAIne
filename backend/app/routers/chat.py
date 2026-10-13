@@ -100,7 +100,7 @@ async def send_chat_message(
         id=str(uuid.uuid4()),
         patient_id=current_patient.id,
         sender_role="ai",
-        sender_name="HealthCopilot AI",
+        sender_name="MED DEV COPILOT AI",
         message=ai_reply_text,
         category=payload.category or "doubt",
         doctor_id=payload.doctor_id,

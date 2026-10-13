@@ -43,7 +43,7 @@ export default function Navbar() {
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-bold text-slate-900 tracking-tight">Carefolio</span>
+              <span className="text-base font-bold text-slate-900 tracking-tight">MED DEV COPILOT</span>
               <span className="text-[10px] bg-blue-50 text-blue-700 font-semibold px-1.5 py-0.5 rounded border border-blue-200/80">
                 v2.0
               </span>

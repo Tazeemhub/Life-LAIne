@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="AI-Powered Personal Health Copilot",
+    title="MED DEV COPILOT",
     description="Upload medical documents, extract structured data, and get AI-generated plain-language summaries.",
     version="1.0.0",
     lifespan=lifespan,
@@ -65,5 +65,5 @@ async def health_check():
 @app.get("/")
 @app.get("/api")
 async def root():
-    return {"message": "Health Copilot API", "docs": "/docs"}
+    return {"message": "MED DEV COPILOT API", "docs": "/docs"}
 
