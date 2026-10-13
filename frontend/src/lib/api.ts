@@ -69,15 +69,50 @@ export const uploadDocument = async (
   if (isXerox !== undefined) formData.append('is_xerox', String(isXerox));
   if (tags) formData.append('tags', tags);
 
-  const { data } = await api.post<UploadResponse>('/api/upload', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-    onUploadProgress: (e) => {
-      if (progressCb && e.total) {
-        progressCb(Math.round((e.loaded / e.total) * 100));
-      }
-    },
-  });
-  return data;
+  try {
+    const { data } = await api.post<UploadResponse>('/api/upload', formData, {
+      onUploadProgress: (e) => {
+        if (progressCb && e.total) {
+          progressCb(Math.round((e.loaded / e.total) * 100));
+        }
+      },
+    });
+    return data;
+  } catch (error) {
+    throw new Error(extractApiErrorMessage(error, 'Upload failed'));
+  }
+};
+
+const extractApiErrorMessage = (error: unknown, fallback: string): string => {
+  if (!axios.isAxiosError(error)) return fallback;
+
+  const data = error.response?.data as
+    | string
+    | { detail?: unknown; message?: unknown }
+    | undefined;
+
+  if (typeof data === 'string' && data.trim()) return data;
+
+  if (data && typeof data === 'object') {
+    if (typeof data.message === 'string' && data.message.trim()) return data.message;
+
+    const detail = data.detail;
+    if (typeof detail === 'string' && detail.trim()) return detail;
+    if (Array.isArray(detail)) {
+      const msgs = detail
+        .map((item) => {
+          if (typeof item === 'string') return item;
+          if (item && typeof item === 'object' && 'msg' in item && typeof item.msg === 'string') {
+            return item.msg;
+          }
+          return '';
+        })
+        .filter(Boolean);
+      if (msgs.length) return msgs.join('; ');
+    }
+  }
+
+  return error.message || fallback;
 };
 
 // ─── DigiLocker Drive Endpoints ──────────────────────────────────────────────

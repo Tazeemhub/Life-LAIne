@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import get_db, AsyncSessionLocal
 from app.models.domain import Document, Patient
 from app.models.schemas import UploadResponse
-from app.services.blob_storage import blob_storage_service
+from app.services.blob_storage import blob_storage_service, StorageUnavailableError
 from app.services.extraction import process_document
 from app.services.auth import get_current_patient
 
@@ -57,8 +57,16 @@ async def upload_document(
     if is_xerox and "xerox" not in [t.lower() for t in tag_list]:
         tag_list.append("xerox")
 
-    # Upload to storage
-    blob_url = await blob_storage_service.upload_file(file_bytes, file.filename, content_type)
+    blob_url: Optional[str] = None
+    try:
+        # Upload to storage
+        blob_url = await blob_storage_service.upload_file(file_bytes, file.filename, content_type)
+    except StorageUnavailableError as exc:
+        logger.exception("Storage upload failed for patient=%s filename=%s", patient.id, file.filename)
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Unexpected upload storage error for patient=%s filename=%s", patient.id, file.filename)
+        raise HTTPException(status_code=500, detail="Failed to upload document file.") from exc
 
     # Create document record
     doc_id = str(uuid.uuid4())
@@ -74,8 +82,19 @@ async def upload_document(
         uploaded_by=uploaded_by or "patient",
         status="processing",
     )
-    db.add(document)
-    await db.commit()
+    try:
+        db.add(document)
+        await db.commit()
+    except Exception as exc:
+        await db.rollback()
+        if blob_url:
+            try:
+                await blob_storage_service.delete_file(blob_url)
+            except Exception as cleanup_exc:
+                logger.warning("Failed to cleanup uploaded file after DB error for document %s: %s", doc_id, cleanup_exc)
+        logger.exception("DB commit failed for uploaded document %s", doc_id)
+        raise HTTPException(status_code=500, detail="Failed to save uploaded document.") from exc
+
     logger.info(f"Document {doc_id} created in folder '{target_folder}' for patient {patient.id}")
 
     # Kick off background processing
