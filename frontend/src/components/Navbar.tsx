@@ -34,22 +34,22 @@ export default function Navbar() {
       ];
 
   return (
-    <nav className="glass-strong sticky top-0 z-50 border-b border-slate-800 backdrop-blur-xl">
+    <nav className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/90 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Brand Logo */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 via-teal-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-            <Heart size={18} className="text-slate-950 font-bold" />
+          <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-500/20 group-hover:bg-blue-700 transition-colors">
+            <Heart size={18} className="text-white fill-white/20 stroke-[2.2]" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="text-base font-extrabold gradient-text tracking-tight">HealthCopilot</span>
-              <span className="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.2 rounded font-mono border border-slate-700/60">
+              <span className="text-base font-bold text-slate-900 tracking-tight">Carefolio</span>
+              <span className="text-[10px] bg-blue-50 text-blue-700 font-semibold px-1.5 py-0.5 rounded border border-blue-200/80">
                 v2.0
               </span>
             </div>
-            <span className="hidden sm:block text-[11px] text-slate-500 -mt-0.5">
-              Clinical Transcriber & DigiLocker Drive
+            <span className="hidden sm:block text-[11px] text-slate-500 -mt-0.5 font-medium">
+              Clinical Transcriber & DigiLocker
             </span>
           </div>
         </Link>
@@ -61,13 +61,13 @@ export default function Navbar() {
             <Link
               to="/"
               className={cn(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs transition-all duration-200',
+                'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs transition-all duration-200 font-medium',
                 pathname === '/'
-                  ? 'bg-slate-800 text-slate-100 font-semibold'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                  ? 'bg-slate-100 text-slate-900 font-semibold shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70'
               )}
             >
-              <Home size={14} />
+              <Home size={14} className="text-slate-500" />
               <span className="hidden md:inline">Home</span>
             </Link>
 
@@ -81,12 +81,12 @@ export default function Navbar() {
                     'flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs transition-all duration-200',
                     active
                       ? isDoctor
-                        ? 'bg-indigo-500/20 text-indigo-300 font-bold border border-indigo-500/30 shadow-sm'
-                        : 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30 shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                        ? 'bg-indigo-50 text-indigo-700 font-semibold border border-indigo-200/80 shadow-xs'
+                        : 'bg-blue-50 text-blue-700 font-semibold border border-blue-200/80 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 font-medium'
                   )}
                 >
-                  <Icon size={14} />
+                  <Icon size={14} className={active ? (isDoctor ? 'text-indigo-600' : 'text-blue-600') : 'text-slate-400'} />
                   <span>{label}</span>
                 </Link>
               );
@@ -94,24 +94,24 @@ export default function Navbar() {
           </div>
 
           {/* Current Persona Badge & Switch Portal Button */}
-          <div className="flex items-center gap-2 pl-2 border-l border-slate-800">
+          <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
             <div
-              className={`hidden lg:flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-xl border ${
+              className={`hidden lg:flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-xl border font-medium ${
                 isDoctor
-                  ? 'bg-indigo-950/40 border-indigo-500/30 text-indigo-300'
-                  : 'bg-cyan-950/40 border-cyan-500/30 text-cyan-300'
+                  ? 'bg-indigo-50 border-indigo-200 text-indigo-800'
+                  : 'bg-blue-50 border-blue-200 text-blue-800'
               }`}
             >
-              {isDoctor ? <Stethoscope size={13} /> : <User size={13} />}
-              <span className="font-semibold truncate max-w-[120px]">{session.name}</span>
+              {isDoctor ? <Stethoscope size={13} className="text-indigo-600" /> : <User size={13} className="text-blue-600" />}
+              <span className="truncate max-w-[120px]">{session.name}</span>
             </div>
 
             <Link
               to="/login"
-              className="flex items-center gap-1.5 text-xs px-3 py-1.5 glass rounded-xl text-slate-300 hover:text-white border border-slate-700/80 hover:border-slate-600 transition-all font-semibold"
+              className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-300 shadow-xs transition-all font-semibold"
               title="Switch between Doctor and Patient portals"
             >
-              <LogIn size={13} className="text-cyan-400" />
+              <LogIn size={13} className="text-blue-600" />
               <span className="hidden sm:inline">Switch Portal</span>
             </Link>
           </div>

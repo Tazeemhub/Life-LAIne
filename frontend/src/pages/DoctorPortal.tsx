@@ -204,36 +204,36 @@ export default function DoctorPortal() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Top Banner: Doctor Clinical Workstation */}
-      <div className="glass rounded-2xl p-6 border border-indigo-500/30 bg-gradient-to-r from-indigo-950/40 via-slate-900 to-slate-900 shadow-xl relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs relative overflow-hidden">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-inner">
-              <Stethoscope size={28} />
+            <div className="w-13 h-13 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shadow-xs">
+              <Stethoscope size={26} />
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-bold text-indigo-300 bg-indigo-500/20 px-2.5 py-0.5 rounded-full border border-indigo-500/30 uppercase tracking-wider">
+                <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 uppercase tracking-wider">
                   Doctor Clinical Station
                 </span>
-                <span className="text-xs text-slate-400 font-medium">
+                <span className="text-xs text-slate-500 font-medium">
                   {session.hospital || 'AIIMS / Hospital Network'}
                 </span>
               </div>
-              <h1 className="text-2xl font-extrabold text-slate-100 mt-1">{session.name}</h1>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <h1 className="text-2xl font-extrabold text-slate-900 mt-1">{session.name}</h1>
+              <p className="text-xs text-slate-500 mt-0.5">
                 {session.specialty || 'Internal Medicine'} • Real-Time Voice Scribe & Patient Drive Ingestion
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="glass px-4 py-2 rounded-xl border border-slate-800 text-right">
-              <p className="text-[10px] uppercase font-semibold text-slate-500">Active Patients</p>
-              <p className="text-lg font-bold text-slate-100">{patients.length}</p>
+            <div className="bg-slate-50 px-4 py-2 rounded-xl border border-slate-200 text-right">
+              <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Active Patients</p>
+              <p className="text-lg font-extrabold text-slate-900">{patients.length}</p>
             </div>
-            <div className="glass px-4 py-2 rounded-xl border border-slate-800 text-right">
-              <p className="text-[10px] uppercase font-semibold text-slate-500">Transcriptions</p>
-              <p className="text-lg font-bold text-indigo-400">Gemini 2.5</p>
+            <div className="bg-slate-50 px-4 py-2 rounded-xl border border-slate-200 text-right">
+              <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Transcription Engine</p>
+              <p className="text-lg font-extrabold text-blue-600">Gemini 2.5</p>
             </div>
           </div>
         </div>
@@ -244,24 +244,24 @@ export default function DoctorPortal() {
         {/* Left Column (5 cols): Patient Directory & Records */}
         <div className="lg:col-span-5 space-y-6">
           {/* Patient Directory */}
-          <div className="glass rounded-2xl p-5 border border-slate-800 space-y-4">
+          <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Users size={16} className="text-indigo-400" />
-                <h2 className="text-sm font-bold text-slate-200">Patient Directory</h2>
+                <Users size={16} className="text-blue-600" />
+                <h2 className="text-sm font-bold text-slate-900">Patient Directory</h2>
               </div>
               <span className="text-xs text-slate-500">{patients.length} registered</span>
             </div>
 
             {/* Search */}
             <div className="relative">
-              <Search size={14} className="absolute left-3 top-3 text-slate-500" />
+              <Search size={14} className="absolute left-3.5 top-3 text-slate-400" />
               <input
                 type="text"
                 value={patientSearch}
                 onChange={(e) => setPatientSearch(e.target.value)}
                 placeholder="Search patient by name or ID..."
-                className="w-full text-xs bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2.5 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-indigo-500"
+                className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3.5 py-2.5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
               />
             </div>
 
@@ -278,15 +278,15 @@ export default function DoctorPortal() {
                     onClick={() => setSelectedPatientId(p.id)}
                     className={`p-3 rounded-xl cursor-pointer transition-all border flex items-center justify-between ${
                       selectedPatientId === p.id
-                        ? 'bg-indigo-600/20 border-indigo-500/50 text-indigo-200 shadow-sm'
-                        : 'glass border-slate-800/80 hover:border-slate-700 text-slate-300'
+                        ? 'bg-blue-50 border-blue-500/60 text-blue-950 shadow-xs'
+                        : 'bg-white border-slate-200/70 hover:bg-slate-50 text-slate-700'
                     }`}
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <p className="text-xs font-bold text-slate-100">{p.name}</p>
+                        <p className="text-xs font-bold text-slate-900">{p.name}</p>
                         {p.mock_abha_id && (
-                          <span className="text-[10px] bg-slate-800 text-cyan-400 px-1.5 py-0.2 rounded font-mono">
+                          <span className="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono font-semibold">
                             ABHA
                           </span>
                         )}
@@ -298,7 +298,7 @@ export default function DoctorPortal() {
                         )}
                       </div>
                     </div>
-                    <ChevronRight size={14} className="text-slate-500" />
+                    <ChevronRight size={14} className="text-slate-400" />
                   </div>
                 ))
               )}
@@ -306,11 +306,11 @@ export default function DoctorPortal() {
           </div>
 
           {/* Patient's Uploaded Files & Xeroxes */}
-          <div className="glass rounded-2xl p-5 border border-slate-800 space-y-4">
+          <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Folder size={16} className="text-amber-400" />
-                <h3 className="text-sm font-bold text-slate-200">
+                <Folder size={16} className="text-amber-500" />
+                <h3 className="text-sm font-bold text-slate-900">
                   {selectedPatient ? `${selectedPatient.name}'s Drive Files` : 'Patient Files'}
                 </h3>
               </div>
@@ -318,7 +318,7 @@ export default function DoctorPortal() {
                 {selectedPatient && (
                   <Link
                     to={`/chat?patientId=${selectedPatient.id}`}
-                    className="flex items-center gap-1.5 text-xs bg-indigo-500/20 text-indigo-300 hover:bg-indigo-500/30 px-2.5 py-1 rounded-xl border border-indigo-500/30 transition-all font-semibold"
+                    className="flex items-center gap-1.5 text-xs bg-blue-50 text-blue-700 hover:bg-blue-100 px-2.5 py-1 rounded-xl border border-blue-200 transition-all font-semibold"
                     title={`Open consultation chat for ${selectedPatient.name}`}
                   >
                     <Bot size={13} />
@@ -341,10 +341,10 @@ export default function DoctorPortal() {
                   key={f.id}
                   type="button"
                   onClick={() => setDocFolderFilter(f.id)}
-                  className={`px-2.5 py-1 rounded-lg transition-all font-medium whitespace-nowrap ${
+                  className={`px-2.5 py-1 rounded-lg transition-all font-semibold whitespace-nowrap ${
                     docFolderFilter === f.id
-                      ? 'bg-indigo-500 text-white'
-                      : 'glass text-slate-400 hover:text-slate-200'
+                      ? 'bg-blue-600 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
                   {f.label}
@@ -362,22 +362,22 @@ export default function DoctorPortal() {
                 patientDocs.map((doc) => (
                   <div
                     key={doc.id}
-                    className="p-3 rounded-xl glass border border-slate-800/80 hover:border-slate-700 transition-all flex items-center justify-between"
+                    className="p-3 rounded-xl bg-slate-50/70 border border-slate-200/80 hover:bg-white hover:border-slate-300 transition-all flex items-center justify-between"
                   >
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <FileText size={14} className="text-slate-400" />
-                        <span className="text-xs font-semibold text-slate-200 break-all">{doc.filename}</span>
+                        <span className="text-xs font-semibold text-slate-800 break-all">{doc.filename}</span>
                       </div>
                       <div className="flex items-center gap-2 text-[10px] text-slate-500">
                         {doc.is_xerox && (
-                          <span className="bg-amber-500/10 text-amber-300 px-1.5 py-0.2 rounded border border-amber-500/20 flex items-center gap-1">
+                          <span className="bg-amber-50 text-amber-700 px-1.5 py-0.2 rounded border border-amber-200 flex items-center gap-1 font-semibold">
                             <Camera size={10} /> Xerox
                           </span>
                         )}
                         <span>{formatDate(doc.created_at)}</span>
                         {doc.overall_confidence && (
-                          <span className="text-cyan-400 font-medium">
+                          <span className="text-blue-700 font-semibold">
                             {Math.round(doc.overall_confidence * 100)}% conf
                           </span>
                         )}
@@ -393,16 +393,16 @@ export default function DoctorPortal() {
 
         {/* Right Column (7 cols): Clinical Dictation Studio & Gemini SOAP Transcriber */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="glass rounded-2xl p-6 border border-indigo-500/20 bg-slate-900/90 space-y-5 shadow-xl">
+          <div className="bg-white rounded-2xl p-6 border border-slate-200/80 space-y-5 shadow-xs">
             {/* Studio Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600">
                   <Sparkles size={18} />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold text-slate-100">AI Clinical Scribe & Dictation Studio</h2>
-                  <p className="text-xs text-slate-400">
+                  <h2 className="text-base font-bold text-slate-900">AI Clinical Scribe & Dictation Studio</h2>
+                  <p className="text-xs text-slate-500">
                     Dictate consultation notes; Gemini extracts structured SOAP notes & prescription orders
                   </p>
                 </div>
@@ -411,7 +411,7 @@ export default function DoctorPortal() {
               <button
                 type="button"
                 onClick={insertSampleDictation}
-                className="text-[11px] text-indigo-400 hover:text-indigo-300 font-medium underline"
+                className="text-[11px] text-blue-600 hover:text-blue-700 font-bold hover:underline"
                 title="Load sample clinical dictation text"
               >
                 Insert Sample
@@ -419,12 +419,12 @@ export default function DoctorPortal() {
             </div>
 
             {/* Target Patient Selector */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-              <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                <Users size={14} className="text-indigo-400" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <span className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                <Users size={14} className="text-blue-600" />
                 <span>Target Patient:</span>
               </span>
-              <div className="text-xs font-bold text-cyan-300">
+              <div className="text-xs font-extrabold text-blue-700">
                 {selectedPatient ? `${selectedPatient.name} (ABHA: ${selectedPatient.mock_abha_id || 'Not linked'})` : 'Select a patient from left list'}
               </div>
             </div>
@@ -432,20 +432,20 @@ export default function DoctorPortal() {
             {/* Dictation Textarea with Voice Recording Controls */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-slate-300">
+                <label className="text-xs font-bold text-slate-800">
                   Physician Voice Dictation / Clinical Notes:
                 </label>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={toggleRecording}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                       isRecording
-                        ? 'bg-red-500 text-white animate-pulse shadow-lg shadow-red-500/20'
-                        : 'glass text-slate-300 hover:text-white border border-slate-700'
+                        ? 'bg-rose-600 text-white animate-pulse shadow-xs'
+                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'
                     }`}
                   >
-                    {isRecording ? <MicOff size={13} /> : <Mic size={13} className="text-red-400" />}
+                    {isRecording ? <MicOff size={13} /> : <Mic size={13} className="text-rose-500" />}
                     <span>{isRecording ? 'Listening (Click to Stop)...' : 'Record Speech'}</span>
                   </button>
                 </div>
@@ -456,7 +456,7 @@ export default function DoctorPortal() {
                 value={dictationText}
                 onChange={(e) => setDictationText(e.target.value)}
                 placeholder="Speak into microphone or type clinical notes here... e.g. Patient presents with acute bronchospasm. Prescribed Inhaler Budesonide 200mcg BID..."
-                className="w-full text-xs bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500 leading-relaxed font-mono"
+                className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white leading-relaxed font-sans"
               />
             </div>
 
@@ -465,7 +465,7 @@ export default function DoctorPortal() {
               type="button"
               onClick={handleTranscribeWithGemini}
               disabled={transcribing || !dictationText.trim()}
-              className="w-full py-3 bg-gradient-to-r from-indigo-500 via-purple-600 to-indigo-600 hover:from-indigo-400 hover:to-purple-500 text-white font-bold text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
               <Sparkles size={16} className={transcribing ? 'animate-spin' : ''} />
               <span>{transcribing ? 'Gemini 2.5 is Structuring SOAP Note...' : 'Transcribe with Gemini Clinical AI'}</span>
@@ -473,53 +473,53 @@ export default function DoctorPortal() {
 
             {/* Generated Structured SOAP Note Panel */}
             {transcriptionResult && (
-              <div className="space-y-4 pt-4 border-t border-slate-800 animate-fadeIn">
+              <div className="space-y-4 pt-4 border-t border-slate-100 animate-fadeIn">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-emerald-400" />
-                    <h3 className="text-sm font-bold text-slate-100">
+                    <CheckCircle2 size={16} className="text-emerald-600" />
+                    <h3 className="text-sm font-bold text-slate-900">
                       {transcriptionResult.title || 'Structured Consultation Note'}
                     </h3>
                   </div>
-                  <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-semibold">
+                  <span className="text-[10px] bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-bold">
                     SOAP Verified
                   </span>
                 </div>
 
                 {/* SOAP Note Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="glass p-3 rounded-xl border border-slate-800">
-                    <p className="text-[11px] font-bold text-cyan-400 uppercase tracking-wider mb-1">
+                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p className="text-[11px] font-bold text-blue-700 uppercase tracking-wider mb-1">
                       Subjective (S)
                     </p>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-700 leading-relaxed">
                       {transcriptionResult.soap_subjective || 'No subjective complaints recorded.'}
                     </p>
                   </div>
 
-                  <div className="glass p-3 rounded-xl border border-slate-800">
-                    <p className="text-[11px] font-bold text-indigo-400 uppercase tracking-wider mb-1">
+                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p className="text-[11px] font-bold text-indigo-700 uppercase tracking-wider mb-1">
                       Objective (O)
                     </p>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-700 leading-relaxed">
                       {transcriptionResult.soap_objective || 'Vitals and observations recorded.'}
                     </p>
                   </div>
 
-                  <div className="glass p-3 rounded-xl border border-slate-800">
-                    <p className="text-[11px] font-bold text-purple-400 uppercase tracking-wider mb-1">
+                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p className="text-[11px] font-bold text-purple-700 uppercase tracking-wider mb-1">
                       Assessment (A)
                     </p>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-700 leading-relaxed">
                       {transcriptionResult.soap_assessment || 'Clinical assessment recorded.'}
                     </p>
                   </div>
 
-                  <div className="glass p-3 rounded-xl border border-slate-800">
-                    <p className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-1">
+                  <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                    <p className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider mb-1">
                       Plan & Follow-up (P)
                     </p>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-700 leading-relaxed">
                       {transcriptionResult.soap_plan || 'Treatment plan documented.'}
                     </p>
                   </div>
@@ -527,12 +527,12 @@ export default function DoctorPortal() {
 
                 {/* Prescriptions & Advice Box */}
                 {transcriptionResult.prescriptions_advice && (
-                  <div className="p-3.5 bg-emerald-950/20 rounded-xl border border-emerald-500/30 space-y-1.5">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
-                      <Pill size={14} />
+                  <div className="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-900">
+                      <Pill size={14} className="text-emerald-700" />
                       <span>Prescriptions & Drug Advice for Patient:</span>
                     </div>
-                    <p className="text-xs text-slate-300 whitespace-pre-wrap leading-relaxed font-mono">
+                    <p className="text-xs text-emerald-950 whitespace-pre-wrap leading-relaxed font-sans font-medium">
                       {transcriptionResult.prescriptions_advice}
                     </p>
                   </div>
@@ -544,7 +544,7 @@ export default function DoctorPortal() {
                     type="button"
                     onClick={handlePublishInsight}
                     disabled={publishing}
-                    className="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                   >
                     <Send size={15} />
                     <span>
@@ -555,8 +555,8 @@ export default function DoctorPortal() {
                   </button>
 
                   {publishedSuccess && (
-                    <div className="mt-3 p-3 bg-emerald-500/20 border border-emerald-500/40 rounded-xl text-emerald-300 text-xs font-semibold flex items-center gap-2 animate-fadeIn">
-                      <CheckCircle2 size={16} />
+                    <div className="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs font-semibold flex items-center gap-2 animate-fadeIn">
+                      <CheckCircle2 size={16} className="text-emerald-600" />
                       <span>
                         Clinical insight published successfully! It is now visible in the patient's personal DigiLocker drive and health timeline.
                       </span>

@@ -118,19 +118,19 @@ export default function ChatWidget() {
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
       {/* Floating Chat Window */}
       {isOpen && (
-        <div className="glass-strong border border-slate-700/80 rounded-3xl w-[360px] sm:w-[400px] h-[520px] max-h-[85vh] flex flex-col shadow-2xl mb-3 overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="bg-white border border-slate-200 rounded-3xl w-[360px] sm:w-[400px] h-[520px] max-h-[85vh] flex flex-col shadow-2xl mb-3 overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Header */}
-          <div className="p-3.5 bg-gradient-to-r from-slate-900 via-slate-900 to-indigo-950/60 border-b border-slate-800 flex items-center justify-between">
+          <div className="p-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-teal-400 flex items-center justify-center text-slate-950 shadow-md">
+              <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-xs">
                 <Bot size={18} />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs font-bold text-slate-100">HealthCopilot AI</h3>
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <h3 className="text-xs font-bold text-slate-900">Carefolio Copilot</h3>
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 </div>
-                <p className="text-[10px] text-slate-400">Doubts, prescriptions & emotions</p>
+                <p className="text-[10px] text-slate-500 font-medium">Empathetic health assistant</p>
               </div>
             </div>
 
@@ -138,14 +138,14 @@ export default function ChatWidget() {
               <Link
                 to="/chat"
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-300 hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg text-slate-500 hover:text-blue-600 hover:bg-slate-100 transition-colors"
                 title="Expand to full screen"
               >
                 <Maximize2 size={14} />
               </Link>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-slate-100 transition-colors"
                 title="Close chat"
               >
                 <X size={15} />
@@ -154,16 +154,16 @@ export default function ChatWidget() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-3.5 space-y-3 text-xs">
+          <div className="flex-1 overflow-y-auto p-3.5 space-y-3 text-xs bg-slate-50/40">
             {messages.length === 0 && (
               <div className="h-full flex flex-col items-center justify-center text-center p-4 space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-2xs">
                   <Sparkles size={22} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-200 text-sm">Need help understanding your health?</h4>
-                  <p className="text-slate-400 text-[11px] mt-1">
-                    Ask any question about your medical files, dosages, or how you're feeling.
+                  <h4 className="font-bold text-slate-900 text-sm">Need help with your records?</h4>
+                  <p className="text-slate-500 text-[11px] mt-1">
+                    Ask questions about your prescriptions, test biomarkers, or clinical terms.
                   </p>
                 </div>
 
@@ -173,9 +173,9 @@ export default function ChatWidget() {
                       setSelectedCategory('doubt');
                       handleSendMessage('Can you explain my latest lab report?');
                     }}
-                    className="w-full text-left p-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 text-[11px] text-slate-300 hover:text-white flex items-center gap-2 transition-all"
+                    className="w-full text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 text-[11px] text-slate-800 font-medium flex items-center gap-2 transition-all shadow-2xs"
                   >
-                    <HelpCircle size={13} className="text-cyan-400 shrink-0" />
+                    <HelpCircle size={13} className="text-blue-600 shrink-0" />
                     <span className="truncate">Explain my latest lab report</span>
                   </button>
                   <button
@@ -183,9 +183,9 @@ export default function ChatWidget() {
                       setSelectedCategory('feeling');
                       handleSendMessage('I am feeling anxious about my test results.');
                     }}
-                    className="w-full text-left p-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-rose-500/40 text-[11px] text-slate-300 hover:text-white flex items-center gap-2 transition-all"
+                    className="w-full text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 text-[11px] text-slate-800 font-medium flex items-center gap-2 transition-all shadow-2xs"
                   >
-                    <Smile size={13} className="text-rose-400 shrink-0" />
+                    <Smile size={13} className="text-rose-500 shrink-0" />
                     <span className="truncate">I feel anxious about my results</span>
                   </button>
                   <button
@@ -193,9 +193,9 @@ export default function ChatWidget() {
                       setSelectedCategory('medication');
                       handleSendMessage('Should I take my medicines with food?');
                     }}
-                    className="w-full text-left p-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 text-[11px] text-slate-300 hover:text-white flex items-center gap-2 transition-all"
+                    className="w-full text-left p-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 text-[11px] text-slate-800 font-medium flex items-center gap-2 transition-all shadow-2xs"
                   >
-                    <Pill size={13} className="text-amber-400 shrink-0" />
+                    <Pill size={13} className="text-amber-500 shrink-0" />
                     <span className="truncate">Should I take medicines with food?</span>
                   </button>
                 </div>
@@ -211,16 +211,16 @@ export default function ChatWidget() {
                 <div key={m.id} className={cn('flex flex-col', isUser ? 'items-end' : 'items-start')}>
                   <div
                     className={cn(
-                      'max-w-[88%] rounded-2xl p-3 relative text-xs leading-relaxed',
+                      'max-w-[88%] rounded-2xl p-3 relative text-xs leading-relaxed shadow-xs',
                       isUser
-                        ? 'bg-gradient-to-br from-cyan-600 to-teal-700 text-white rounded-br-sm'
+                        ? 'bg-blue-600 text-white rounded-br-xs font-medium'
                         : isDoc
-                        ? 'bg-indigo-950/60 border border-indigo-500/40 text-slate-100 rounded-bl-sm'
-                        : 'glass border border-slate-800 text-slate-200 rounded-bl-sm'
+                        ? 'bg-indigo-50 border border-indigo-200 text-indigo-950 rounded-bl-xs'
+                        : 'bg-white border border-slate-200 text-slate-800 rounded-bl-xs'
                     )}
                   >
-                    <div className="flex items-center justify-between gap-2 mb-1 opacity-75 text-[10px]">
-                      <span className="font-bold">{isAI ? 'HealthCopilot' : m.sender_name}</span>
+                    <div className="flex items-center justify-between gap-2 mb-1 opacity-80 text-[10px]">
+                      <span className="font-bold">{isAI ? 'Carefolio Copilot' : m.sender_name}</span>
                       <span>
                         {new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
@@ -229,20 +229,20 @@ export default function ChatWidget() {
                     <div className="whitespace-pre-line">{m.message}</div>
 
                     {isAI && (
-                      <div className="flex items-center justify-end gap-1 mt-2 pt-1 border-t border-slate-800/60">
+                      <div className="flex items-center justify-end gap-1 mt-2 pt-1 border-t border-slate-100">
                         <button
                           onClick={() => handleToggleSpeak(m.id, m.message)}
-                          className="p-1 rounded text-slate-400 hover:text-cyan-300 transition-colors"
+                          className="p-1 rounded text-slate-400 hover:text-blue-600 transition-colors"
                           title="Listen"
                         >
                           {isSpeaking === m.id ? <VolumeX size={12} /> : <Volume2 size={12} />}
                         </button>
                         <button
                           onClick={() => handleCopy(m.id, m.message)}
-                          className="p-1 rounded text-slate-400 hover:text-cyan-300 transition-colors"
+                          className="p-1 rounded text-slate-400 hover:text-blue-600 transition-colors"
                           title="Copy"
                         >
-                          {copiedId === m.id ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                          {copiedId === m.id ? <Check size={12} className="text-emerald-600" /> : <Copy size={12} />}
                         </button>
                       </div>
                     )}
@@ -252,21 +252,21 @@ export default function ChatWidget() {
             })}
 
             {isSending && (
-              <div className="flex items-center gap-2 glass p-2 rounded-xl text-slate-400 text-xs">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>Thinking...</span>
+              <div className="flex items-center gap-2 bg-white border border-slate-200 p-2.5 rounded-xl text-slate-600 text-xs shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                <span className="font-medium">Thinking...</span>
               </div>
             )}
 
             {followups.length > 0 && !isSending && (
               <div className="space-y-1 pt-1">
-                <p className="text-[10px] text-slate-500 font-semibold">Suggested:</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Suggested follow-ups:</p>
                 <div className="flex flex-wrap gap-1">
                   {followups.slice(0, 2).map((f, i) => (
                     <button
                       key={i}
                       onClick={() => handleSendMessage(f)}
-                      className="text-[10px] glass px-2 py-1 rounded-lg border border-slate-800 hover:border-cyan-500/40 text-cyan-300 truncate max-w-full text-left"
+                      className="text-[10px] bg-white px-2.5 py-1 rounded-lg border border-slate-200 hover:border-blue-300 text-blue-700 truncate max-w-full text-left font-medium shadow-2xs"
                     >
                       {f}
                     </button>
@@ -279,35 +279,35 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Box */}
-          <div className="p-2.5 bg-slate-900/90 border-t border-slate-800 space-y-2">
+          <div className="p-3 bg-white border-t border-slate-200 space-y-2">
             <div className="flex items-center gap-1.5">
               <input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Ask about symptoms, doubts..."
-                className="flex-1 bg-slate-950 border border-slate-800 focus:border-cyan-500/50 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none"
+                placeholder="Ask about symptoms, medications, doubts..."
+                className="flex-1 bg-slate-50 border border-slate-300 focus:bg-white focus:border-blue-600 focus:ring-1 focus:ring-blue-100 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none transition-all"
               />
               <button
                 onClick={() => handleSendMessage()}
                 disabled={!inputText.trim() || isSending}
                 className={cn(
-                  'p-2 rounded-xl transition-all',
+                  'p-2 rounded-xl transition-all shadow-xs',
                   inputText.trim() && !isSending
-                    ? 'bg-cyan-500 text-slate-950 hover:bg-cyan-400'
-                    : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                 )}
               >
                 <Send size={14} />
               </button>
             </div>
-            <div className="flex items-center justify-between text-[9px] text-slate-500 px-1">
+            <div className="flex items-center justify-between text-[10px] text-slate-500 px-1 font-medium">
               <span className="flex items-center gap-1">
-                <ShieldCheck size={10} className="text-teal-400" />
-                AI Health Support
+                <ShieldCheck size={11} className="text-blue-600" />
+                Empathetic Health Support
               </span>
-              <Link to="/chat" className="text-cyan-400 hover:underline">
+              <Link to="/chat" className="text-blue-600 hover:underline font-semibold">
                 Open Full Chat →
               </Link>
             </div>
@@ -318,16 +318,16 @@ export default function ChatWidget() {
       {/* Floating Action Launcher Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex items-center gap-2.5 p-3.5 sm:px-4 sm:py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-teal-500 to-indigo-500 text-slate-950 font-bold shadow-xl shadow-cyan-500/25 hover:scale-105 active:scale-95 transition-all duration-200"
-        title="Open HealthCopilot AI Companion"
+        className="group relative flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-500/25 hover:bg-blue-700 hover:scale-102 active:scale-98 transition-all duration-200"
+        title="Open Carefolio Health Copilot"
       >
         <span className="relative flex items-center justify-center">
-          <Bot size={20} className="group-hover:rotate-12 transition-transform" />
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-950 animate-ping" />
-          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-950" />
+          <Bot size={20} className="group-hover:rotate-6 transition-transform" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-blue-600 animate-ping" />
+          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-blue-600" />
         </span>
-        <span className="hidden sm:inline text-xs font-extrabold tracking-tight">
-          Ask Health Copilot
+        <span className="hidden sm:inline text-xs font-bold tracking-tight">
+          Ask Carefolio AI
         </span>
       </button>
     </div>

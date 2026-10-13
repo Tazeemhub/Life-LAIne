@@ -70,7 +70,6 @@ export const uploadDocument = async (
   if (tags) formData.append('tags', tags);
 
   const { data } = await api.post<UploadResponse>('/api/upload', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
     onUploadProgress: (e) => {
       if (progressCb && e.total) {
         progressCb(Math.round((e.loaded / e.total) * 100));

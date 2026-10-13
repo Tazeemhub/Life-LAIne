@@ -102,27 +102,27 @@ export default function Profile() {
     <div className="max-w-2xl mx-auto px-4 py-8">
       {/* Header */}
       <div className="flex items-center gap-3 mb-8">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 flex items-center justify-center shadow-sm">
-          <User size={18} className="text-orange-400" />
+        <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center shadow-xs">
+          <User size={20} className="text-blue-600" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">Patient Profile</h1>
-          <p className="text-sm text-slate-500">Member since {formatDate(profile.created_at)}</p>
+          <h1 className="text-2xl font-extrabold text-slate-900">Patient Profile</h1>
+          <p className="text-sm text-slate-500 font-medium">Member since {formatDate(profile.created_at)}</p>
         </div>
       </div>
 
       {errorMessage && (
-        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm flex items-center gap-2">
-          <AlertCircle size={16} className="shrink-0" />
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm flex items-center gap-2 font-medium">
+          <AlertCircle size={16} className="shrink-0 text-rose-600" />
           <span>{errorMessage}</span>
         </div>
       )}
 
       {/* Profile card */}
-      <div className="glass rounded-2xl p-6 space-y-6 border border-slate-800">
+      <div className="bg-white rounded-2xl p-6 space-y-6 border border-slate-200/80 shadow-xs">
         {/* Name */}
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
             Patient Display Name
           </label>
           <input
@@ -130,14 +130,14 @@ export default function Profile() {
             value={profile.name || ''}
             onChange={(e) => setProfile((p) => (p ? { ...p, name: e.target.value } : p))}
             placeholder="e.g. Rajesh Kumar"
-            className="w-full bg-slate-900 border border-slate-700/80 text-slate-100 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-cyan-500 transition-colors"
+            className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors"
           />
         </div>
 
         {/* Preferred Language */}
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            <Globe size={13} className="text-cyan-400" />
+          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Globe size={13} className="text-blue-600" />
             <span>Preferred Language (for AI Summaries)</span>
           </label>
           <div className="grid grid-cols-2 gap-2.5">
@@ -146,10 +146,10 @@ export default function Profile() {
                 key={lang.code}
                 type="button"
                 onClick={() => setProfile((p) => (p ? { ...p, preferred_language: lang.code } : p))}
-                className={`text-sm px-4 py-2.5 rounded-xl border transition-all text-left ${
+                className={`text-sm px-4 py-2.5 rounded-xl border transition-all text-left font-medium ${
                   profile.preferred_language === lang.code
-                    ? 'border-cyan-500 bg-cyan-500/15 text-cyan-300 font-medium shadow-sm'
-                    : 'border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                    ? 'border-blue-500 bg-blue-50 text-blue-900 font-bold shadow-xs'
+                    : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900'
                 }`}
               >
                 {lang.label}
@@ -160,8 +160,8 @@ export default function Profile() {
 
         {/* Mock ABHA ID */}
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            <Link2 size={13} className="text-teal-400" />
+          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            <Link2 size={13} className="text-blue-600" />
             <span>ABHA Health ID (Ayushman Bharat Digital Mission)</span>
           </label>
           <div className="flex gap-2">
@@ -170,7 +170,7 @@ export default function Profile() {
               value={abhaInput}
               onChange={(e) => setAbhaInput(e.target.value)}
               placeholder="e.g. 91-8472-9102-4412"
-              className="flex-1 bg-slate-900 border border-slate-700/80 text-slate-100 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-cyan-500 transition-colors font-mono"
+              className="flex-1 bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-600 focus:bg-white transition-colors font-mono"
             />
             <button
               type="button"
@@ -181,7 +181,7 @@ export default function Profile() {
                   )}-${Math.floor(1000 + Math.random() * 9000)}`
                 )
               }
-              className="text-xs text-slate-400 hover:text-cyan-300 glass px-3.5 py-2 rounded-xl transition-colors border border-slate-700/60"
+              className="text-xs font-bold text-slate-700 hover:text-blue-600 bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl transition-colors border border-slate-200 shadow-xs"
             >
               Generate
             </button>
@@ -189,24 +189,24 @@ export default function Profile() {
               <button
                 type="button"
                 onClick={() => setAbhaInput('')}
-                className="text-xs text-slate-500 hover:text-red-400 glass px-2.5 py-2 rounded-xl transition-colors border border-slate-700/60"
+                className="text-xs font-bold text-slate-400 hover:text-rose-600 bg-white hover:bg-rose-50 px-2.5 py-2 rounded-xl transition-colors border border-slate-200 shadow-xs"
                 title="Clear ABHA ID"
               >
                 Clear
               </button>
             )}
           </div>
-          <p className="text-xs text-slate-500 mt-1.5">
+          <p className="text-xs text-slate-500 mt-1.5 font-medium">
             Simulates ABDM ABHA 14-digit identifier format (XX-XXXX-XXXX-XXXX).
           </p>
         </div>
 
         {/* Patient ID */}
         <div>
-          <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
             System Patient ID
           </label>
-          <p className="text-xs text-slate-400 font-mono bg-slate-900/90 border border-slate-800 px-3.5 py-2.5 rounded-xl break-all">
+          <p className="text-xs text-slate-700 font-mono bg-slate-50 border border-slate-200 px-3.5 py-2.5 rounded-xl break-all">
             {profile.id}
           </p>
         </div>
@@ -216,7 +216,7 @@ export default function Profile() {
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold py-3 rounded-xl hover:from-cyan-400 hover:to-teal-400 transition-all shadow-md shadow-cyan-500/20 disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all shadow-xs disabled:opacity-50"
         >
           {saved ? (
             <><CheckCircle size={16} /> Preferences Saved!</>
@@ -229,12 +229,12 @@ export default function Profile() {
       </div>
 
       {/* FHIR Export Card */}
-      <div className="mt-6 glass rounded-2xl p-6 border border-slate-800">
-        <h3 className="text-sm font-semibold text-slate-200 mb-2 flex items-center gap-2">
+      <div className="mt-6 bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
+        <h3 className="text-sm font-bold text-slate-900 mb-2 flex items-center gap-2">
           <span className="text-lg">⚕️</span>
           <span>HL7 FHIR R4 Bundle Export</span>
         </h3>
-        <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+        <p className="text-xs text-slate-600 mb-4 leading-relaxed font-medium">
           Export your health data as a standardized HL7 FHIR R4 JSON collection bundle, compatible with international EHR systems and India's ABDM digital health lockers.
         </p>
         <div className="flex gap-2.5 flex-wrap">
@@ -242,16 +242,16 @@ export default function Profile() {
             type="button"
             onClick={handleFhirExport}
             disabled={loadingFhir}
-            className="flex items-center gap-2 text-sm text-slate-300 glass px-4 py-2 rounded-xl hover:text-white transition-colors border border-slate-700/60"
+            className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 px-4 py-2.5 rounded-xl transition-colors border border-slate-200 shadow-xs"
           >
-            {loadingFhir && <Loader2 size={14} className="animate-spin text-cyan-400" />}
+            {loadingFhir && <Loader2 size={14} className="animate-spin text-blue-600" />}
             <span>{showFhir ? 'Refresh FHIR Bundle' : 'View FHIR Bundle'}</span>
           </button>
           {fhirData && (
             <button
               type="button"
               onClick={downloadFhir}
-              className="flex items-center gap-2 text-sm text-cyan-300 glass px-4 py-2 rounded-xl hover:text-cyan-200 transition-colors border border-cyan-500/30 bg-cyan-500/10"
+              className="flex items-center gap-2 text-xs font-bold text-blue-700 bg-blue-50 hover:bg-blue-100 px-4 py-2.5 rounded-xl transition-colors border border-blue-200"
             >
               <Download size={14} />
               <span>Download JSON</span>
@@ -261,7 +261,7 @@ export default function Profile() {
 
         {showFhir && fhirData && (
           <div className="mt-4">
-            <pre className="text-xs text-slate-300 bg-slate-900/90 rounded-xl p-4 overflow-auto max-h-72 font-mono border border-slate-800/80">
+            <pre className="text-xs text-slate-800 bg-slate-50 rounded-xl p-4 overflow-auto max-h-72 font-mono border border-slate-200">
               {JSON.stringify(fhirData, null, 2)}
             </pre>
           </div>

@@ -29,9 +29,9 @@ export function formatDate(dateStr?: string | null): string {
 }
 
 export function confidenceClass(score: number): string {
-  if (score >= 0.8) return 'text-green-400';
-  if (score >= 0.6) return 'text-yellow-400';
-  return 'text-red-400';
+  if (score >= 0.8) return 'text-emerald-700 font-semibold';
+  if (score >= 0.6) return 'text-amber-700 font-semibold';
+  return 'text-rose-700 font-semibold';
 }
 
 export function confidenceLabel(score: number): string {
@@ -107,10 +107,10 @@ export function eventTypeIcon(type: string): string {
 
 export function eventTypeBg(type: string): string {
   const map: Record<string, string> = {
-    medication: 'bg-purple-500/20 border-purple-500/40 text-purple-300',
-    lab_result: 'bg-blue-500/20 border-blue-500/40 text-blue-300',
-    diagnosis: 'bg-orange-500/20 border-orange-500/40 text-orange-300',
-    document: 'bg-slate-500/20 border-slate-500/40 text-slate-300',
+    medication: 'bg-purple-50 border-purple-200 text-purple-800 font-medium',
+    lab_result: 'bg-blue-50 border-blue-200 text-blue-800 font-medium',
+    diagnosis: 'bg-amber-50 border-amber-200 text-amber-900 font-medium',
+    document: 'bg-slate-100 border-slate-200 text-slate-800 font-medium',
   };
-  return map[type] || 'bg-slate-500/20 border-slate-500/40 text-slate-300';
+  return map[type] || 'bg-slate-100 border-slate-200 text-slate-800 font-medium';
 }

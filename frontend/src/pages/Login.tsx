@@ -76,18 +76,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 sm:p-6 bg-radial-gradient">
+    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 sm:p-6 bg-slate-50/50">
       <div className="w-full max-w-4xl space-y-8 py-8">
         {/* Title & Branding */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Activity size={13} />
             <span>Dual-Portal Healthcare Platform</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-100 tracking-tight">
-            Choose Your Dedicated Environment
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Choose Your Dedicated Portal
           </h1>
-          <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto font-normal">
             Log in to the clinical station designed for doctors or the secure personal DigiLocker drive for patients.
           </p>
         </div>
@@ -99,32 +99,32 @@ export default function Login() {
             onClick={() => setSelectedRole('doctor')}
             className={`cursor-pointer rounded-2xl p-6 transition-all border relative flex flex-col justify-between ${
               selectedRole === 'doctor'
-                ? 'bg-gradient-to-b from-indigo-950/60 to-slate-900 border-indigo-500 shadow-xl shadow-indigo-500/10 ring-2 ring-indigo-500/30'
-                : 'glass border-slate-800 hover:border-slate-700 opacity-80 hover:opacity-100'
+                ? 'bg-white border-indigo-500 shadow-lg ring-2 ring-indigo-200'
+                : 'bg-white/80 border-slate-200 hover:border-slate-300 hover:bg-white shadow-xs'
             }`}
           >
             {selectedRole === 'doctor' && (
-              <div className="absolute top-4 right-4 text-indigo-400">
-                <CheckCircle2 size={20} />
+              <div className="absolute top-4 right-4 text-indigo-600">
+                <CheckCircle2 size={22} />
               </div>
             )}
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-inner">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shadow-2xs">
                 <Stethoscope size={24} />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-indigo-400 uppercase tracking-wider bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">
+                <span className="text-[11px] font-bold text-indigo-700 uppercase tracking-wider bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-200">
                   Doctor / Clinician Portal
                 </span>
-                <h2 className="text-xl font-bold text-slate-100 mt-2">Clinical Station</h2>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                <h2 className="text-xl font-bold text-slate-900 mt-2">Clinical Station</h2>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   Speech-to-text dictation with Gemini SOAP note transcription, patient diagnostic records review, and instant insight sharing.
                 </p>
               </div>
 
               {/* Doctor Quick Presets */}
-              <div className="pt-3 border-t border-slate-800/80 space-y-2">
-                <p className="text-[11px] font-semibold text-slate-400">1-Click Doctor Demo Logins:</p>
+              <div className="pt-3 border-t border-slate-200 space-y-2">
+                <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">1-Click Doctor Demo Logins:</p>
                 {DOCTOR_PRESETS.map((doc) => (
                   <button
                     key={doc.id}
@@ -133,22 +133,22 @@ export default function Login() {
                       e.stopPropagation();
                       handleLogin(doc);
                     }}
-                    className="w-full text-left p-2.5 rounded-xl bg-slate-900/80 hover:bg-indigo-600/20 border border-slate-800 hover:border-indigo-500/40 transition-all flex items-center justify-between group"
+                    className="w-full text-left p-2.5 rounded-xl bg-slate-50 hover:bg-indigo-50/70 border border-slate-200 hover:border-indigo-300 transition-all flex items-center justify-between group shadow-2xs"
                   >
                     <div>
-                      <p className="text-xs font-semibold text-slate-200 group-hover:text-indigo-300">
+                      <p className="text-xs font-bold text-slate-900 group-hover:text-indigo-700">
                         {doc.name}
                       </p>
                       <p className="text-[10px] text-slate-500">{doc.specialty} • {doc.hospital}</p>
                     </div>
-                    <ArrowRight size={14} className="text-slate-600 group-hover:text-indigo-400 transition-colors" />
+                    <ArrowRight size={14} className="text-slate-400 group-hover:text-indigo-600 transition-colors" />
                   </button>
                 ))}
               </div>
             </div>
 
             <div className="mt-5 pt-3">
-              <span className="text-[11px] text-indigo-400/80 font-medium flex items-center gap-1.5">
+              <span className="text-[11px] text-indigo-700 font-semibold flex items-center gap-1.5">
                 <Hospital size={13} />
                 <span>Specialized clinical workstation layout</span>
               </span>
@@ -160,32 +160,32 @@ export default function Login() {
             onClick={() => setSelectedRole('patient')}
             className={`cursor-pointer rounded-2xl p-6 transition-all border relative flex flex-col justify-between ${
               selectedRole === 'patient'
-                ? 'bg-gradient-to-b from-cyan-950/60 to-slate-900 border-cyan-500 shadow-xl shadow-cyan-500/10 ring-2 ring-cyan-500/30'
-                : 'glass border-slate-800 hover:border-slate-700 opacity-80 hover:opacity-100'
+                ? 'bg-white border-blue-600 shadow-lg ring-2 ring-blue-200'
+                : 'bg-white/80 border-slate-200 hover:border-slate-300 hover:bg-white shadow-xs'
             }`}
           >
             {selectedRole === 'patient' && (
-              <div className="absolute top-4 right-4 text-cyan-400">
-                <CheckCircle2 size={20} />
+              <div className="absolute top-4 right-4 text-blue-600">
+                <CheckCircle2 size={22} />
               </div>
             )}
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-inner">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-2xs">
                 <ShieldCheck size={24} />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-cyan-400 uppercase tracking-wider bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-500/20">
+                <span className="text-[11px] font-bold text-blue-700 uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
                   Patient Health Locker
                 </span>
-                <h2 className="text-xl font-bold text-slate-100 mt-2">DigiLocker-Style Drive</h2>
-                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                <h2 className="text-xl font-bold text-slate-900 mt-2">DigiLocker-Style Drive</h2>
+                <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   Categorized folders for prescriptions, lab reports, camera/xerox scans, discharge summaries, and verified doctor insights.
                 </p>
               </div>
 
               {/* Patient Quick Presets */}
-              <div className="pt-3 border-t border-slate-800/80 space-y-2">
-                <p className="text-[11px] font-semibold text-slate-400">1-Click Patient Demo Logins:</p>
+              <div className="pt-3 border-t border-slate-200 space-y-2">
+                <p className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">1-Click Patient Demo Logins:</p>
                 {PATIENT_PRESETS.map((pat) => (
                   <button
                     key={pat.id}
@@ -194,22 +194,22 @@ export default function Login() {
                       e.stopPropagation();
                       handleLogin(pat);
                     }}
-                    className="w-full text-left p-2.5 rounded-xl bg-slate-900/80 hover:bg-cyan-600/20 border border-slate-800 hover:border-cyan-500/40 transition-all flex items-center justify-between group"
+                    className="w-full text-left p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200 hover:border-blue-300 transition-all flex items-center justify-between group shadow-2xs"
                   >
                     <div>
-                      <p className="text-xs font-semibold text-slate-200 group-hover:text-cyan-300">
+                      <p className="text-xs font-bold text-slate-900 group-hover:text-blue-700">
                         {pat.name}
                       </p>
                       <p className="text-[10px] text-slate-500">ABHA: {pat.mock_abha_id}</p>
                     </div>
-                    <ArrowRight size={14} className="text-slate-600 group-hover:text-cyan-400 transition-colors" />
+                    <ArrowRight size={14} className="text-slate-400 group-hover:text-blue-600 transition-colors" />
                   </button>
                 ))}
               </div>
             </div>
 
             <div className="mt-5 pt-3">
-              <span className="text-[11px] text-cyan-400/80 font-medium flex items-center gap-1.5">
+              <span className="text-[11px] text-blue-700 font-semibold flex items-center gap-1.5">
                 <User size={13} />
                 <span>Personal health vault with Xerox scanner</span>
               </span>
@@ -218,8 +218,8 @@ export default function Login() {
         </div>
 
         {/* Custom Sign-In Form */}
-        <div className="glass rounded-2xl p-6 border border-slate-800 max-w-xl mx-auto">
-          <h3 className="text-sm font-bold text-slate-200 mb-1">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200 max-w-xl mx-auto shadow-sm">
+          <h3 className="text-sm font-bold text-slate-900 mb-1">
             Or Sign In with Custom Name ({selectedRole === 'doctor' ? 'Doctor Mode' : 'Patient Mode'})
           </h3>
           <p className="text-xs text-slate-500 mb-4">
@@ -228,7 +228,7 @@ export default function Login() {
 
           <form onSubmit={handleCustomSubmit} className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-slate-400 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 {selectedRole === 'doctor' ? 'Doctor Full Name' : 'Patient Full Name'}
               </label>
               <input
@@ -237,29 +237,29 @@ export default function Login() {
                 value={customName}
                 onChange={(e) => setCustomName(e.target.value)}
                 placeholder={selectedRole === 'doctor' ? 'e.g. Dr. Sameer Khan' : 'e.g. Meera Patel'}
-                className="w-full text-xs bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500"
+                className="w-full text-xs bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100"
               />
             </div>
 
             {selectedRole === 'doctor' && (
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">Specialty / Department</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Specialty / Department</label>
                 <input
                   type="text"
                   value={customSpecialty}
                   onChange={(e) => setCustomSpecialty(e.target.value)}
-                  placeholder="e.g. Endocrinology, Dermatology"
-                  className="w-full text-xs bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-slate-100 placeholder-slate-600 focus:outline-none focus:border-indigo-500"
+                  placeholder="e.g. Endocrinology, Cardiology"
+                  className="w-full text-xs bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-100"
                 />
               </div>
             )}
 
             <button
               type="submit"
-              className={`w-full py-2.5 text-xs font-bold rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ${
+              className={`w-full py-2.5 text-xs font-bold rounded-xl transition-all shadow-xs flex items-center justify-center gap-2 ${
                 selectedRole === 'doctor'
-                  ? 'bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white'
-                  : 'bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950'
+                  ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
               }`}
             >
               <span>Continue to {selectedRole === 'doctor' ? 'Doctor Clinical Station' : 'Patient DigiLocker'}</span>

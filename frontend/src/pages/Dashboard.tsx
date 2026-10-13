@@ -96,12 +96,12 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-teal-500/20 border border-cyan-500/30 flex items-center justify-center shadow-sm">
-            <LayoutDashboard size={18} className="text-cyan-400" />
+          <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center shadow-xs">
+            <LayoutDashboard size={20} className="text-blue-600" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-100">Clinical Dashboard</h1>
-            <p className="text-sm text-slate-500">
+            <h1 className="text-2xl font-extrabold text-slate-900">Clinical Dashboard</h1>
+            <p className="text-sm text-slate-500 font-medium">
               {documents.length} document{documents.length === 1 ? '' : 's'} total
               {processingCount > 0 && ` · ${processingCount} processing in background…`}
             </p>
@@ -113,15 +113,15 @@ export default function Dashboard() {
             type="button"
             onClick={() => fetchDocs(true)}
             disabled={loading}
-            className="flex items-center gap-2 text-sm text-slate-300 hover:text-white transition-colors glass px-3.5 py-2 rounded-xl border border-slate-700/60"
+            className="flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 px-3.5 py-2.5 rounded-xl transition-colors border border-slate-200 shadow-xs"
           >
-            <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
+            <RefreshCw size={13} className={loading ? 'animate-spin text-blue-600' : ''} />
             <span>Refresh</span>
           </button>
           <button
             type="button"
             onClick={() => setShowUpload((v) => !v)}
-            className="flex items-center gap-2 text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-medium px-4 py-2 rounded-xl hover:from-cyan-400 hover:to-teal-400 transition-all shadow-md shadow-cyan-500/20"
+            className="flex items-center gap-2 text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl transition-all shadow-xs"
           >
             {showUpload ? <X size={14} /> : <Plus size={14} />}
             <span>{showUpload ? 'Close' : 'Upload'}</span>
@@ -130,7 +130,7 @@ export default function Dashboard() {
       </div>
 
       {errorMessage && (
-        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
+        <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-sm font-medium">
           {errorMessage}
         </div>
       )}
@@ -138,13 +138,13 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'Total Ingested', value: documents.length, color: 'text-slate-100' },
-          { label: 'Processing (AI)', value: processingCount, color: 'text-cyan-400' },
-          { label: 'Ready & Analyzed', value: completedCount, color: 'text-green-400' },
+          { label: 'Total Ingested', value: documents.length, color: 'text-slate-900' },
+          { label: 'Processing (AI)', value: processingCount, color: 'text-blue-600' },
+          { label: 'Ready & Analyzed', value: completedCount, color: 'text-emerald-600' },
         ].map((stat) => (
-          <div key={stat.label} className="glass rounded-2xl p-5 text-center border border-slate-800">
+          <div key={stat.label} className="bg-white rounded-2xl p-5 text-center border border-slate-200/80 shadow-xs">
             <p className={`text-3xl font-extrabold ${stat.color}`}>{stat.value}</p>
-            <p className="text-xs text-slate-400 mt-1 uppercase tracking-wider font-medium">{stat.label}</p>
+            <p className="text-xs text-slate-500 mt-1 uppercase tracking-wider font-bold">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -165,16 +165,16 @@ export default function Dashboard() {
 
       {/* Document List */}
       {documents.length === 0 && !loading ? (
-        <div className="text-center py-20 glass rounded-2xl border border-slate-800">
+        <div className="text-center py-20 bg-white rounded-2xl border border-slate-200/80 shadow-xs">
           <p className="text-5xl mb-4">📂</p>
-          <p className="text-slate-300 font-semibold text-lg">No medical documents yet</p>
-          <p className="text-sm text-slate-500 mt-1 mb-6 max-w-sm mx-auto">
+          <p className="text-slate-900 font-bold text-lg">No medical documents yet</p>
+          <p className="text-sm text-slate-500 mt-1 mb-6 max-w-sm mx-auto font-medium">
             Upload a prescription, lab report, or discharge summary to see instant AI extraction and plain-language summaries.
           </p>
           <button
             type="button"
             onClick={() => setShowUpload(true)}
-            className="flex items-center gap-2 mx-auto text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-medium px-5 py-2.5 rounded-xl hover:from-cyan-400 hover:to-teal-400 transition-all shadow-md shadow-cyan-500/25"
+            className="flex items-center gap-2 mx-auto text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl transition-all shadow-xs"
           >
             <Plus size={15} /> Upload Medical Document
           </button>

@@ -1,3 +1,6 @@
+import os
+import shutil
+from pathlib import Path
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy import text
 from app.config import get_settings
@@ -7,7 +10,33 @@ logger = logging.getLogger(__name__)
 
 settings = get_settings()
 
-is_sqlite = "sqlite" in settings.database_url
+def get_effective_db_url() -> str:
+    db_url = settings.database_url
+    if "sqlite" in db_url:
+        is_serverless = bool(os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"))
+        is_readonly = not os.access(".", os.W_OK)
+        if is_serverless or is_readonly:
+            tmp_db = Path("/tmp/healthcopilot.db")
+            if not tmp_db.exists():
+                # Attempt to copy seed database so existing patients/data are preserved
+                candidates = [
+                    Path("healthcopilot.db"),
+                    Path("backend/healthcopilot.db"),
+                    Path(__file__).resolve().parent.parent.parent / "healthcopilot.db",
+                ]
+                for c in candidates:
+                    if c.exists():
+                        try:
+                            shutil.copy2(c, tmp_db)
+                            logger.info(f"Copied initial SQLite database from {c} to {tmp_db}")
+                            break
+                        except Exception as e:
+                            logger.warning(f"Failed to copy initial database: {e}")
+            return f"sqlite+aiosqlite:///{tmp_db}"
+    return db_url
+
+effective_db_url = get_effective_db_url()
+is_sqlite = "sqlite" in effective_db_url
 
 engine_kwargs = {
     "echo": settings.environment == "development",
@@ -21,11 +50,14 @@ if not is_sqlite:
     })
 else:
     engine_kwargs.update({
-        "connect_args": {"check_same_thread": False},
+        "connect_args": {
+            "check_same_thread": False,
+            "timeout": 30,
+        },
     })
 
 engine = create_async_engine(
-    settings.database_url,
+    effective_db_url,
     **engine_kwargs
 )
 
@@ -37,8 +69,16 @@ AsyncSessionLocal = async_sessionmaker(
     autoflush=False,
 )
 
+_db_initialized = False
+
 
 async def get_db() -> AsyncSession:
+    global _db_initialized
+    if not _db_initialized:
+        try:
+            await init_db()
+        except Exception as e:
+            logger.warning(f"Lazy init_db failed: {e}")
     async with AsyncSessionLocal() as session:
         try:
             yield session
@@ -51,6 +91,7 @@ async def get_db() -> AsyncSession:
 
 async def init_db():
     """Create all tables and apply safe migrations."""
+    global _db_initialized
     from app.models.domain import Base
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
@@ -69,6 +110,7 @@ async def init_db():
                 # Column already exists
                 pass
 
+    _db_initialized = True
     logger.info("Database tables and migrations created successfully.")
 
 

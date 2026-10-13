@@ -73,23 +73,43 @@ class DocumentIntelligenceService:
                 return ""
 
     def _extract_pdf(self, file_bytes: bytes) -> str:
+        # 1. Try pypdf (pure Python, installed in requirements.txt)
         try:
-            import fitz  # PyMuPDF
+            import pypdf
+            import io
+            reader = pypdf.PdfReader(io.BytesIO(file_bytes))
+            text = "\n".join(page.extract_text() or "" for page in reader.pages)
+            if text.strip():
+                return text
+        except ImportError:
+            pass
+        except Exception as e:
+            logger.warning(f"pypdf extraction error: {e}")
+
+        # 2. Try fitz (PyMuPDF) if installed
+        try:
+            import fitz
             doc = fitz.open(stream=file_bytes, filetype="pdf")
             text = ""
             for page in doc:
                 text += page.get_text()
-            return text
+            if text.strip():
+                return text
         except ImportError:
-            logger.warning("PyMuPDF not installed. Falling back to built-in stream parser.")
+            pass
+        except Exception as e:
+            logger.error(f"fitz PDF extraction error: {e}")
+
+        # 3. Fallback regex stream extractor
+        try:
             import re
             matches = re.findall(rb'\((.*?)\)\s*Tj', file_bytes)
             if matches:
                 return "\n".join(m.decode("latin-1", errors="ignore").replace("\\(", "(").replace("\\)", ")") for m in matches)
-            return "[PDF text extraction unavailable — PyMuPDF not installed]"
-        except Exception as e:
-            logger.error(f"PDF extraction error: {e}")
-            return ""
+        except Exception:
+            pass
+
+        return "[PDF text extraction unavailable — please ensure PDF has extractable text]"
 
     def _extract_image(self, file_bytes: bytes) -> str:
         try:

@@ -153,46 +153,46 @@ export default function DocumentDetail() {
       <div className="flex items-center justify-between gap-4 mb-6">
         <Link
           to="/dashboard"
-          className="flex items-center gap-2 text-sm text-slate-400 hover:text-slate-200 transition-colors w-fit"
+          className="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-blue-600 transition-colors w-fit"
         >
-          <ArrowLeft size={14} /> Back to Dashboard
+          <ArrowLeft size={15} /> Back to Dashboard
         </Link>
 
         {notification && (
           <div
-            className={`text-xs px-3 py-1.5 rounded-xl border flex items-center gap-1.5 shadow-lg ${
+            className={`text-xs px-3.5 py-1.5 rounded-xl border flex items-center gap-1.5 font-medium shadow-xs ${
               notification.type === 'success'
-                ? 'bg-cyan-500/15 border-cyan-500/30 text-cyan-300'
-                : 'bg-red-500/15 border-red-500/30 text-red-300'
+                ? 'bg-blue-50 border-blue-200 text-blue-800'
+                : 'bg-rose-50 border-rose-200 text-rose-800'
             }`}
           >
-            {notification.type === 'success' ? <CheckCircle2 size={13} /> : <AlertCircle size={13} />}
+            {notification.type === 'success' ? <CheckCircle2 size={14} className="text-blue-600" /> : <AlertCircle size={14} className="text-rose-600" />}
             <span>{notification.message}</span>
           </div>
         )}
       </div>
 
       {/* Header Card */}
-      <div className="glass rounded-2xl p-6 mb-6 border border-slate-800">
+      <div className="bg-white rounded-2xl p-6 mb-6 border border-slate-200/80 shadow-xs">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-start sm:items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-slate-800 flex items-center justify-center text-3xl shrink-0 shadow-md">
+            <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-3xl shrink-0 shadow-xs">
               {docTypeIcon(doc.document_type)}
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-100 break-all">{doc.filename}</h1>
+              <h1 className="text-xl font-extrabold text-slate-900 break-all">{doc.filename}</h1>
               <div className="flex items-center gap-3 mt-1.5 flex-wrap">
-                <span className="text-xs text-slate-400 bg-slate-800 px-2.5 py-0.5 rounded-full border border-slate-700/60 font-medium">
+                <span className="text-xs text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 font-semibold">
                   {docTypeLabel(doc.document_type)}
                 </span>
                 <StatusBadge status={doc.status} />
                 {doc.extracted_data?.overall_confidence !== undefined && (
-                  <span className={`text-xs font-semibold ${confidenceClass(doc.extracted_data.overall_confidence)}`}>
+                  <span className={`text-xs font-bold ${confidenceClass(doc.extracted_data.overall_confidence)}`}>
                     {Math.round(doc.extracted_data.overall_confidence * 100)}% overall confidence
                   </span>
                 )}
               </div>
-              <p className="text-xs text-slate-500 mt-1">Uploaded {formatDate(doc.created_at)}</p>
+              <p className="text-xs text-slate-500 mt-1 font-medium">Uploaded {formatDate(doc.created_at)}</p>
             </div>
           </div>
 
@@ -201,10 +201,10 @@ export default function DocumentDetail() {
               <button
                 type="button"
                 onClick={() => setIsSideBySide((v) => !v)}
-                className={`flex items-center gap-1.5 text-xs px-3 py-2 rounded-xl transition-all border ${
+                className={`flex items-center gap-1.5 text-xs px-3 py-2 rounded-xl transition-all border font-semibold ${
                   isSideBySide
-                    ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40 font-medium'
-                    : 'glass text-slate-400 hover:text-slate-200 border-slate-700/60'
+                    ? 'bg-blue-50 text-blue-700 border-blue-300 shadow-xs'
+                    : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-200'
                 }`}
                 title="Toggle side-by-side verification view"
               >
@@ -217,30 +217,30 @@ export default function DocumentDetail() {
               type="button"
               onClick={() => handleReprocess()}
               disabled={reprocessing || doc.status === 'processing'}
-              className="flex items-center gap-2 text-xs text-slate-300 hover:text-white glass px-3 py-2 rounded-xl transition-colors disabled:opacity-50 border border-slate-700/60"
+              className="flex items-center gap-2 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl transition-colors disabled:opacity-50 border border-slate-200 shadow-xs"
             >
-              <RefreshCw size={13} className={reprocessing || doc.status === 'processing' ? 'animate-spin' : ''} />
+              <RefreshCw size={13} className={reprocessing || doc.status === 'processing' ? 'animate-spin text-blue-600' : ''} />
               <span>Reprocess</span>
             </button>
 
             <button
               type="button"
               onClick={handleDelete}
-              className="text-xs text-slate-500 hover:text-red-400 glass p-2 rounded-xl transition-colors border border-slate-700/60"
+              className="text-xs text-slate-400 hover:text-rose-600 bg-white hover:bg-rose-50 p-2 rounded-xl transition-colors border border-slate-200 shadow-xs"
               title="Delete document"
             >
-              <Trash2 size={14} />
+              <Trash2 size={15} />
             </button>
           </div>
         </div>
 
         {/* Processing notification */}
         {doc.status === 'processing' && (
-          <div className="mt-4 flex items-center gap-3 text-sm text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-3.5">
-            <Loader2 size={18} className="animate-spin shrink-0 text-cyan-400" />
+          <div className="mt-4 flex items-center gap-3 text-sm text-blue-900 bg-blue-50 border border-blue-200 rounded-xl p-3.5">
+            <Loader2 size={18} className="animate-spin shrink-0 text-blue-600" />
             <div>
-              <p className="font-semibold text-cyan-200">AI is analyzing clinical document…</p>
-              <p className="text-xs text-cyan-300/80 mt-0.5">
+              <p className="font-bold text-blue-950">AI is analyzing clinical document…</p>
+              <p className="text-xs text-blue-800 mt-0.5">
                 Performing OCR, extracting clinical schema, and generating plain-language health insights.
               </p>
             </div>
@@ -249,15 +249,15 @@ export default function DocumentDetail() {
 
         {/* Failed notification */}
         {doc.status === 'failed' && (
-          <div className="mt-4 flex items-center justify-between gap-3 text-sm text-red-300 bg-red-500/10 border border-red-500/20 rounded-xl p-3.5">
+          <div className="mt-4 flex items-center justify-between gap-3 text-sm text-rose-900 bg-rose-50 border border-rose-200 rounded-xl p-3.5">
             <div className="flex items-center gap-2.5">
-              <AlertCircle size={18} className="shrink-0 text-red-400" />
-              <span>{doc.error_message || 'Processing failed.'}</span>
+              <AlertCircle size={18} className="shrink-0 text-rose-600" />
+              <span className="font-medium">{doc.error_message || 'Processing failed.'}</span>
             </div>
             <button
               type="button"
               onClick={() => handleReprocess()}
-              className="text-xs font-semibold underline hover:text-red-200"
+              className="text-xs font-bold underline text-rose-700 hover:text-rose-900"
             >
               Retry
             </button>
@@ -271,15 +271,15 @@ export default function DocumentDetail() {
           {isSideBySide ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Left Column: Raw OCR Source Text */}
-              <div className="glass rounded-2xl p-6 border border-slate-800">
-                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
                   <div className="flex items-center gap-2">
-                    <FileText size={16} className="text-cyan-400" />
-                    <h3 className="text-sm font-semibold text-slate-200">Raw OCR Extracted Text</h3>
+                    <FileText size={16} className="text-blue-600" />
+                    <h3 className="text-sm font-bold text-slate-900">Raw OCR Extracted Text</h3>
                   </div>
-                  <span className="text-xs text-slate-500">Source Document</span>
+                  <span className="text-xs font-semibold text-slate-500">Source Document</span>
                 </div>
-                <pre className="text-xs text-slate-300 whitespace-pre-wrap font-mono leading-relaxed overflow-x-auto max-h-[700px] overflow-y-auto p-3 bg-slate-900/60 rounded-xl border border-slate-800/80">
+                <pre className="text-xs text-slate-800 whitespace-pre-wrap font-mono leading-relaxed overflow-x-auto max-h-[700px] overflow-y-auto p-3.5 bg-slate-50 rounded-xl border border-slate-200">
                   {doc.ocr_text || 'No text extracted'}
                 </pre>
               </div>
@@ -295,9 +295,9 @@ export default function DocumentDetail() {
                   />
                 )}
                 {doc.extracted_data && (
-                  <div className="glass rounded-2xl p-6 border border-slate-800">
-                    <h3 className="text-sm font-semibold text-slate-200 mb-4 pb-3 border-b border-slate-800 flex items-center gap-2">
-                      <FlaskConical size={16} className="text-teal-400" />
+                  <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
+                    <h3 className="text-sm font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
+                      <FlaskConical size={16} className="text-blue-600" />
                       <span>Extracted Clinical Entities</span>
                     </h3>
                     <ExtractedFieldsPanel extracted={doc.extracted_data} />
@@ -309,16 +309,16 @@ export default function DocumentDetail() {
             /* Standard Tabbed Mode */
             <>
               {/* Tabs */}
-              <div className="flex items-center gap-1 mb-6 glass rounded-xl p-1 w-fit border border-slate-800">
+              <div className="flex items-center gap-1.5 mb-6 bg-slate-100 rounded-xl p-1 w-fit border border-slate-200">
                 {TABS.filter((t) => !t.disabled).map((t) => (
                   <button
                     key={t.id}
                     type="button"
                     onClick={() => setTab(t.id)}
-                    className={`flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg transition-all ${
+                    className={`flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-lg transition-all ${
                       tab === t.id
-                        ? 'bg-cyan-500/20 text-cyan-300 font-medium'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-blue-600 text-white shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
                     }`}
                   >
                     {t.icon} {t.label}
@@ -327,7 +327,7 @@ export default function DocumentDetail() {
               </div>
 
               {/* Tab Content */}
-              <div className="glass rounded-2xl p-6 border border-slate-800">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
                 {tab === 'extracted' && doc.extracted_data && (
                   <ExtractedFieldsPanel extracted={doc.extracted_data} />
                 )}
@@ -341,8 +341,8 @@ export default function DocumentDetail() {
                 )}
                 {tab === 'ocr' && doc.ocr_text && (
                   <div>
-                    <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Raw OCR Text</h3>
-                    <pre className="text-xs text-slate-300 whitespace-pre-wrap font-mono leading-relaxed overflow-x-auto bg-slate-900/60 p-4 rounded-xl border border-slate-800/80">
+                    <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Raw OCR Text</h3>
+                    <pre className="text-xs text-slate-800 whitespace-pre-wrap font-mono leading-relaxed overflow-x-auto bg-slate-50 p-4 rounded-xl border border-slate-200">
                       {doc.ocr_text}
                     </pre>
                   </div>
@@ -363,13 +363,13 @@ export default function DocumentDetail() {
 
 function StatusBadge({ status }: { status: string }) {
   const config: Record<string, { label: string; cls: string }> = {
-    processing: { label: 'Processing', cls: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30' },
-    completed: { label: 'Ready', cls: 'text-green-400 bg-green-500/10 border-green-500/30' },
-    failed: { label: 'Failed', cls: 'text-red-400 bg-red-500/10 border-red-500/30' },
+    processing: { label: 'Processing', cls: 'text-blue-700 bg-blue-50 border-blue-200' },
+    completed: { label: 'Ready', cls: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+    failed: { label: 'Failed', cls: 'text-rose-700 bg-rose-50 border-rose-200' },
   };
   const s = config[status] || config.processing;
   return (
-    <span className={`text-xs px-2.5 py-0.5 rounded-full border font-medium ${s.cls}`}>
+    <span className={`text-xs px-2.5 py-0.5 rounded-full border font-bold ${s.cls}`}>
       {s.label}
     </span>
   );

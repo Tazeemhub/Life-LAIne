@@ -110,40 +110,40 @@ export default function PatientDrive() {
   const getFolderIcon = (iconName: string) => {
     switch (iconName) {
       case 'Pill':
-        return <Pill size={18} className="text-emerald-400" />;
+        return <Pill size={18} className="text-emerald-600" />;
       case 'FlaskConical':
-        return <FlaskConical size={18} className="text-purple-400" />;
+        return <FlaskConical size={18} className="text-purple-600" />;
       case 'Camera':
-        return <Camera size={18} className="text-amber-400" />;
+        return <Camera size={18} className="text-amber-600" />;
       case 'FileText':
-        return <FileText size={18} className="text-blue-400" />;
+        return <FileText size={18} className="text-blue-600" />;
       case 'ShieldCheck':
-        return <ShieldCheck size={18} className="text-indigo-400" />;
+        return <ShieldCheck size={18} className="text-indigo-600" />;
       default:
-        return <Folder size={18} className="text-cyan-400" />;
+        return <Folder size={18} className="text-blue-600" />;
     }
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Top Banner: Patient DigiLocker Drive */}
-      <div className="glass rounded-2xl p-6 border border-cyan-500/30 bg-gradient-to-r from-cyan-950/40 via-slate-900 to-slate-900 shadow-xl relative overflow-hidden">
+      <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm relative overflow-hidden">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-inner">
+            <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-2xs">
               <ShieldCheck size={28} />
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-bold text-cyan-300 bg-cyan-500/20 px-2.5 py-0.5 rounded-full border border-cyan-500/30 uppercase tracking-wider">
+                <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 uppercase tracking-wider">
                   DigiLocker Health Drive
                 </span>
-                <span className="text-xs text-slate-400 font-mono bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700">
+                <span className="text-xs text-slate-600 font-mono bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200 font-semibold">
                   ABHA: {session.mock_abha_id || patient?.mock_abha_id || '91-8842-1920-3341'}
                 </span>
               </div>
-              <h1 className="text-2xl font-extrabold text-slate-100 mt-1">{session.name}</h1>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <h1 className="text-2xl font-extrabold text-slate-900 mt-1">{session.name}</h1>
+              <p className="text-xs text-slate-600 mt-0.5">
                 Centralized personal repository for prescriptions, lab xeroxes, mobile scans & doctor insights
               </p>
             </div>
@@ -153,16 +153,16 @@ export default function PatientDrive() {
             <button
               type="button"
               onClick={() => setShowCameraModal(true)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs rounded-xl border border-slate-300 shadow-2xs transition-all"
             >
-              <Camera size={15} />
+              <Camera size={15} className="text-blue-600" />
               <span>Scan Xerox / Photo</span>
             </button>
 
             <button
               type="button"
               onClick={() => setShowUploadZone((v) => !v)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all"
             >
               <Upload size={15} />
               <span>Upload PDF / Files</span>
@@ -173,13 +173,13 @@ export default function PatientDrive() {
 
       {/* Upload Dropzone (Collapsible) */}
       {showUploadZone && (
-        <div className="glass rounded-2xl p-6 border border-cyan-500/30 animate-fadeIn">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-md animate-fadeIn">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-bold text-slate-200">Upload Document to DigiLocker</h3>
+            <h3 className="text-sm font-bold text-slate-900">Upload Document to DigiLocker</h3>
             <button
               type="button"
               onClick={() => setShowUploadZone(false)}
-              className="text-xs text-slate-400 hover:text-white"
+              className="text-xs text-slate-500 hover:text-slate-800 font-semibold"
             >
               Close
             </button>
@@ -196,11 +196,11 @@ export default function PatientDrive() {
       {/* DigiLocker Folder Tiles Bar */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-            <Folder size={14} className="text-cyan-400" />
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
+            <Folder size={14} className="text-blue-600" />
             <span>DigiLocker Category Folders</span>
           </h2>
-          <span className="text-xs text-slate-500">{documents.length} Total Files Stored</span>
+          <span className="text-xs text-slate-500 font-semibold">{documents.length} Total Files Stored</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -210,21 +210,21 @@ export default function PatientDrive() {
               onClick={() => setActiveFolder(f.id)}
               className={`p-3.5 rounded-2xl cursor-pointer transition-all border flex flex-col justify-between ${
                 activeFolder === f.id
-                  ? 'bg-cyan-500/20 border-cyan-500 shadow-md ring-2 ring-cyan-500/30 text-cyan-200'
-                  : 'glass border-slate-800 hover:border-slate-700 text-slate-300 hover:bg-slate-900/60'
+                  ? 'bg-blue-50 border-blue-600 shadow-xs ring-2 ring-blue-100 text-blue-900'
+                  : 'bg-white border-slate-200 hover:border-slate-300 text-slate-700 shadow-2xs hover:bg-slate-50/50'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-xl bg-slate-900/80 border border-slate-700/60 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center">
                   {getFolderIcon(f.icon)}
                 </div>
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-900/80 border border-slate-800 text-slate-300">
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700">
                   {f.count}
                 </span>
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-100 truncate">{f.label}</p>
-                <p className="text-[10px] text-slate-500 mt-0.5">Category Folder</p>
+                <p className="text-xs font-bold text-slate-900 truncate">{f.label}</p>
+                <p className="text-[10px] text-slate-500 mt-0.5 font-medium">Category Folder</p>
               </div>
             </div>
           ))}
@@ -233,38 +233,38 @@ export default function PatientDrive() {
 
       {/* Shared Doctor's Insights Inbox Banner */}
       {insights.length > 0 && (
-        <div className="glass rounded-2xl p-5 border border-indigo-500/30 bg-gradient-to-r from-indigo-950/30 to-slate-900 space-y-3">
+        <div className="bg-white rounded-2xl p-5 border border-indigo-200 shadow-xs space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+              <div className="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
                 <Stethoscope size={16} />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-slate-100">Verified Doctor Insights & Prescriptions</h3>
-                <p className="text-[11px] text-slate-400">
+                <h3 className="text-sm font-bold text-slate-900">Verified Doctor Insights & Prescriptions</h3>
+                <p className="text-[11px] text-slate-500">
                   Clinical remarks and prescription instructions shared directly from your healthcare providers
                 </p>
               </div>
             </div>
-            <span className="text-xs text-indigo-300 bg-indigo-500/20 px-2.5 py-0.5 rounded-full border border-indigo-500/30 font-semibold">
+            <span className="text-xs text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-full border border-indigo-200 font-bold">
               {insights.length} Notes Received
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
             {insights.map((ins) => (
-              <div key={ins.id} className="p-4 rounded-xl bg-slate-900/80 border border-indigo-500/20 space-y-2">
+              <div key={ins.id} className="p-4 rounded-xl bg-indigo-50/30 border border-indigo-100 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-indigo-300">{ins.doctor_name}</span>
+                  <span className="text-xs font-bold text-indigo-700">{ins.doctor_name}</span>
                   <span className="text-[10px] text-slate-500">{formatDate(ins.created_at)}</span>
                 </div>
-                <p className="text-xs font-semibold text-slate-100">{ins.title}</p>
-                <p className="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                <p className="text-xs font-bold text-slate-900">{ins.title}</p>
+                <p className="text-xs text-slate-700 leading-relaxed line-clamp-3">
                   {ins.clinical_notes}
                 </p>
                 {ins.prescriptions_advice && (
-                  <div className="p-2.5 rounded-lg bg-emerald-950/30 border border-emerald-500/20 text-[11px] text-emerald-300 font-mono">
-                    <span className="font-bold">Prescription Advice: </span>
+                  <div className="p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-950 font-mono">
+                    <span className="font-bold text-emerald-800">Prescription Advice: </span>
                     {ins.prescriptions_advice}
                   </div>
                 )}
@@ -275,31 +275,31 @@ export default function PatientDrive() {
       )}
 
       {/* Drive Toolbar: Search, Tag Filters, View Toggle */}
-      <div className="glass rounded-2xl p-4 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white rounded-2xl p-4 border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xs">
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search size={14} className="absolute left-3 top-3 text-slate-500" />
+          <Search size={14} className="absolute left-3 top-3 text-slate-400" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search reports, medicines, xeroxes..."
-            className="w-full text-xs bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-cyan-500"
+            className="w-full text-xs bg-slate-50 border border-slate-300 rounded-xl pl-9 pr-3.5 py-2 text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-100 transition-all"
           />
         </div>
 
         {/* Tag Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 text-xs">
-          <span className="text-slate-500 text-[11px] font-semibold pr-1">Tags:</span>
+          <span className="text-slate-500 text-[11px] font-bold pr-1">Tags:</span>
           {['all', 'xerox', 'scan', 'lab', 'rx', 'prescription'].map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setActiveTag(t)}
-              className={`px-3 py-1 rounded-lg transition-all capitalize font-medium ${
+              className={`px-3 py-1 rounded-lg transition-all capitalize font-semibold shadow-2xs ${
                 activeTag === t
-                  ? 'bg-cyan-500 text-slate-950 font-bold shadow-sm'
-                  : 'glass text-slate-400 hover:text-slate-200 border border-slate-800'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-slate-50 text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200'
               }`}
             >
               {t}
@@ -308,12 +308,12 @@ export default function PatientDrive() {
         </div>
 
         {/* View Mode Toggle */}
-        <div className="flex items-center gap-1 glass p-1 rounded-xl border border-slate-800 self-end md:self-auto">
+        <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl border border-slate-200 self-end md:self-auto">
           <button
             type="button"
             onClick={() => setViewMode('grid')}
             className={`p-1.5 rounded-lg transition-all ${
-              viewMode === 'grid' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-500 hover:text-slate-300'
+              viewMode === 'grid' ? 'bg-white text-blue-600 shadow-2xs font-bold' : 'text-slate-400 hover:text-slate-700'
             }`}
             title="Grid View"
           >
@@ -323,7 +323,7 @@ export default function PatientDrive() {
             type="button"
             onClick={() => setViewMode('list')}
             className={`p-1.5 rounded-lg transition-all ${
-              viewMode === 'list' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-500 hover:text-slate-300'
+              viewMode === 'list' ? 'bg-white text-blue-600 shadow-2xs font-bold' : 'text-slate-400 hover:text-slate-700'
             }`}
             title="List View"
           >
@@ -334,16 +334,16 @@ export default function PatientDrive() {
 
       {/* Documents Area */}
       {loading ? (
-        <div className="p-12 text-center text-slate-500 text-xs flex items-center justify-center gap-2">
-          <RefreshCw size={16} className="animate-spin text-cyan-400" />
-          <span>Loading DigiLocker drive...</span>
+        <div className="p-12 text-center text-slate-500 text-xs flex items-center justify-center gap-2 bg-white rounded-2xl border border-slate-200 shadow-xs">
+          <RefreshCw size={16} className="animate-spin text-blue-600" />
+          <span className="font-semibold text-slate-700">Loading DigiLocker drive...</span>
         </div>
       ) : documents.length === 0 ? (
-        <div className="glass rounded-2xl p-12 text-center border border-slate-800 space-y-3">
-          <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mx-auto text-cyan-400">
+        <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-xs space-y-3">
+          <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto text-blue-600 shadow-2xs">
             <Folder size={26} />
           </div>
-          <p className="text-sm font-bold text-slate-200">No documents found in this folder</p>
+          <p className="text-sm font-bold text-slate-900">No documents found in this folder</p>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
             Upload a prescription, lab report, or use the Xerox camera scanner to add your records to this folder.
           </p>
@@ -351,14 +351,14 @@ export default function PatientDrive() {
             <button
               type="button"
               onClick={() => setShowCameraModal(true)}
-              className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-md"
+              className="px-4 py-2 bg-white hover:bg-slate-50 text-slate-800 font-bold text-xs rounded-xl border border-slate-300 shadow-2xs"
             >
               Scan Xerox Now
             </button>
             <button
               type="button"
               onClick={() => setShowUploadZone(true)}
-              className="px-4 py-2 glass hover:bg-slate-800 text-slate-200 font-semibold text-xs rounded-xl border border-slate-700"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs"
             >
               Upload PDF
             </button>
@@ -371,20 +371,20 @@ export default function PatientDrive() {
             <div
               key={doc.id}
               onClick={() => navigate(`/documents/${doc.id}`)}
-              className="glass rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/40 transition-all cursor-pointer group flex flex-col justify-between hover:shadow-xl hover:shadow-cyan-500/5"
+              className="bg-white rounded-2xl p-5 border border-slate-200 hover:border-blue-300 transition-all cursor-pointer group flex flex-col justify-between shadow-xs hover:shadow-md"
             >
               <div className="space-y-3">
                 {/* Header line */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyan-400 group-hover:border-cyan-500/30 transition-colors">
-                      {doc.is_xerox ? <Camera size={16} className="text-amber-400" /> : <FileText size={16} />}
+                    <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                      {doc.is_xerox ? <Camera size={16} /> : <FileText size={16} />}
                     </div>
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
                         {doc.folder || 'Prescriptions'}
                       </span>
-                      <p className="text-[10px] text-slate-500">{formatDate(doc.created_at)}</p>
+                      <p className="text-[10px] text-slate-400 font-medium">{formatDate(doc.created_at)}</p>
                     </div>
                   </div>
                   <StatusBadge status={doc.status} />
@@ -392,11 +392,11 @@ export default function PatientDrive() {
 
                 {/* Filename */}
                 <div>
-                  <h3 className="text-xs font-bold text-slate-100 group-hover:text-cyan-300 transition-colors break-all line-clamp-1">
+                  <h3 className="text-xs font-bold text-slate-900 group-hover:text-blue-700 transition-colors break-all line-clamp-1">
                     {doc.filename}
                   </h3>
                   {doc.overall_confidence && (
-                    <p className="text-[10px] text-cyan-400/90 font-medium mt-1">
+                    <p className="text-[10px] text-blue-700 font-semibold mt-1">
                       {Math.round(doc.overall_confidence * 100)}% Extraction Confidence
                     </p>
                   )}
@@ -405,14 +405,14 @@ export default function PatientDrive() {
                 {/* Tags */}
                 <div className="flex items-center gap-1.5 flex-wrap pt-1">
                   {doc.is_xerox && (
-                    <span className="text-[10px] bg-amber-500/10 text-amber-300 border border-amber-500/20 px-2 py-0.5 rounded-full font-semibold">
+                    <span className="text-[10px] bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full font-bold">
                       Xerox / Scan
                     </span>
                   )}
                   {doc.tags?.map((tg, idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-full border border-slate-700/60"
+                      className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full border border-slate-200 font-medium"
                     >
                       #{tg}
                     </span>
@@ -421,14 +421,14 @@ export default function PatientDrive() {
               </div>
 
               {/* Bottom Actions & Move Folder Selector */}
-              <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2" onClick={(e) => e.stopPropagation()}>
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2" onClick={(e) => e.stopPropagation()}>
                 {/* Move folder select */}
-                <div className="flex items-center gap-1 text-[11px] text-slate-400">
-                  <MoveRight size={12} className="text-slate-500" />
+                <div className="flex items-center gap-1 text-[11px] text-slate-600 font-medium">
+                  <MoveRight size={12} className="text-slate-400" />
                   <select
                     value={doc.folder || 'prescriptions'}
                     onChange={(e) => handleMoveFolder(doc.id, e.target.value)}
-                    className="bg-slate-900 border border-slate-800 text-[10px] rounded-lg px-2 py-1 text-slate-300 focus:outline-none focus:border-cyan-500"
+                    className="bg-slate-50 border border-slate-200 text-[10px] rounded-lg px-2 py-1 text-slate-800 focus:outline-none focus:border-blue-600 font-medium"
                   >
                     <option value="prescriptions">Prescriptions</option>
                     <option value="lab_reports">Lab & Diagnostics</option>
@@ -442,7 +442,7 @@ export default function PatientDrive() {
                   <button
                     type="button"
                     onClick={(e) => handleDelete(doc.id, e)}
-                    className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 transition-colors"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
                     title="Delete document"
                   >
                     <Trash2 size={13} />
@@ -450,7 +450,7 @@ export default function PatientDrive() {
                   <button
                     type="button"
                     onClick={() => navigate(`/documents/${doc.id}`)}
-                    className="p-1.5 rounded-lg text-cyan-400 hover:text-cyan-300 transition-colors"
+                    className="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors"
                     title="Open details"
                   >
                     <Eye size={13} />
@@ -462,26 +462,26 @@ export default function PatientDrive() {
         </div>
       ) : (
         /* List View */
-        <div className="glass rounded-2xl border border-slate-800 overflow-hidden divide-y divide-slate-800">
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden divide-y divide-slate-100 shadow-xs">
           {documents.map((doc) => (
             <div
               key={doc.id}
               onClick={() => navigate(`/documents/${doc.id}`)}
-              className="p-4 hover:bg-slate-900/60 transition-all cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group"
+              className="p-4 hover:bg-slate-50/70 transition-all cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 group"
             >
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyan-400">
-                  {doc.is_xerox ? <Camera size={16} className="text-amber-400" /> : <FileText size={16} />}
+                <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
+                  {doc.is_xerox ? <Camera size={16} /> : <FileText size={16} />}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-100 group-hover:text-cyan-300 transition-colors break-all">
+                  <h4 className="text-xs font-bold text-slate-900 group-hover:text-blue-700 transition-colors break-all">
                     {doc.filename}
                   </h4>
                   <div className="flex items-center gap-2 text-[10px] text-slate-500 mt-0.5 flex-wrap">
-                    <span className="font-semibold text-slate-400 uppercase">{doc.folder || 'Prescriptions'}</span>
+                    <span className="font-bold text-slate-600 uppercase">{doc.folder || 'Prescriptions'}</span>
                     <span>• {formatDate(doc.created_at)}</span>
                     {doc.is_xerox && (
-                      <span className="text-amber-400 font-semibold bg-amber-500/10 px-1.5 py-0.2 rounded border border-amber-500/20">
+                      <span className="text-amber-800 font-bold bg-amber-50 px-1.5 py-0.2 rounded border border-amber-200">
                         Xerox Copy
                       </span>
                     )}
@@ -496,7 +496,7 @@ export default function PatientDrive() {
                 <select
                   value={doc.folder || 'prescriptions'}
                   onChange={(e) => handleMoveFolder(doc.id, e.target.value)}
-                  className="bg-slate-900 border border-slate-800 text-[10px] rounded-lg px-2 py-1 text-slate-300 focus:outline-none focus:border-cyan-500"
+                  className="bg-slate-50 border border-slate-200 text-[10px] rounded-lg px-2 py-1 text-slate-800 focus:outline-none focus:border-blue-600 font-medium"
                 >
                   <option value="prescriptions">Prescriptions</option>
                   <option value="lab_reports">Lab & Diagnostics</option>
@@ -508,7 +508,7 @@ export default function PatientDrive() {
                 <button
                   type="button"
                   onClick={(e) => handleDelete(doc.id, e)}
-                  className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
                   title="Delete document"
                 >
                   <Trash2 size={13} />

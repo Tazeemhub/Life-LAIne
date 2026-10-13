@@ -56,10 +56,10 @@ const SUGGESTED_QUESTIONS = [
 ];
 
 const CATEGORIES = [
-  { id: 'doubt', label: 'Medical Doubt', icon: HelpCircle, color: 'text-amber-400 bg-amber-500/10 border-amber-500/30' },
-  { id: 'feeling', label: 'Feelings & Anxiety', icon: Smile, color: 'text-rose-400 bg-rose-500/10 border-rose-500/30' },
-  { id: 'medication', label: 'Medications', icon: Pill, color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30' },
-  { id: 'general', label: 'General Health', icon: HeartHandshake, color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' },
+  { id: 'doubt', label: 'Medical Doubt', icon: HelpCircle, color: 'text-amber-800 bg-amber-50 border-amber-300' },
+  { id: 'feeling', label: 'Feelings & Anxiety', icon: Smile, color: 'text-rose-800 bg-rose-50 border-rose-300' },
+  { id: 'medication', label: 'Medications', icon: Pill, color: 'text-blue-800 bg-blue-50 border-blue-300' },
+  { id: 'general', label: 'General Health', icon: HeartHandshake, color: 'text-emerald-800 bg-emerald-50 border-emerald-300' },
 ];
 
 export default function Chat() {
@@ -221,22 +221,22 @@ export default function Chat() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 h-[calc(100vh-5rem)] flex flex-col gap-4">
       {/* Top Header Card */}
-      <div className="glass rounded-2xl p-4 sm:p-5 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg shrink-0">
+      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs shrink-0">
         <div className="flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-teal-400 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-cyan-500/20">
+          <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-bold shadow-xs">
             <Bot size={24} />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-lg font-extrabold text-slate-100 flex items-center gap-2">
-                HealthCopilot AI Companion
-                <span className="text-[10px] bg-cyan-500/20 text-cyan-300 font-mono px-2 py-0.5 rounded-full border border-cyan-500/30 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              <h1 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                Carefolio Health Companion
+                <span className="text-[10px] bg-blue-50 text-blue-700 font-semibold px-2 py-0.5 rounded-full border border-blue-200 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                   Gemini 2.5 Flash
                 </span>
               </h1>
             </div>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 font-medium">
               {isDoctor
                 ? 'Clinical consultations, doubt clarification, and patient direct-reply station'
                 : 'Empathetic medical doubts, symptoms, prescription guidance, and emotional support'}
@@ -247,15 +247,15 @@ export default function Chat() {
         <div className="flex items-center gap-2.5 w-full md:w-auto justify-between md:justify-end">
           {/* Doctor Patient Selector */}
           {isDoctor && patients.length > 0 && (
-            <div className="flex items-center gap-2 glass px-3 py-1.5 rounded-xl border border-indigo-500/30 text-xs">
-              <Users size={14} className="text-indigo-400" />
+            <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 text-xs">
+              <Users size={14} className="text-blue-600" />
               <select
                 value={activePatientId}
                 onChange={(e) => setActivePatientId(e.target.value)}
-                className="bg-transparent text-slate-200 font-medium focus:outline-none cursor-pointer"
+                className="bg-transparent text-slate-800 font-semibold focus:outline-none cursor-pointer"
               >
                 {patients.map((p) => (
-                  <option key={p.id} value={p.id} className="bg-slate-900 text-slate-200">
+                  <option key={p.id} value={p.id} className="bg-white text-slate-900">
                     Patient: {p.name || 'Anonymous'}
                   </option>
                 ))}
@@ -266,7 +266,7 @@ export default function Chat() {
           {/* Clear history button */}
           <button
             onClick={handleClearHistory}
-            className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-rose-400 px-3 py-1.5 rounded-xl hover:bg-slate-800/60 border border-slate-800 transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-rose-600 px-3 py-1.5 rounded-xl hover:bg-rose-50 border border-slate-200 bg-white shadow-xs transition-colors"
             title="Clear Chat History"
           >
             <Trash2 size={13} />
@@ -276,7 +276,7 @@ export default function Chat() {
           {isDoctor ? (
             <Link
               to="/doctor"
-              className="flex items-center gap-1 text-xs text-indigo-300 hover:text-white glass px-3 py-1.5 rounded-xl border border-indigo-500/30 transition-all font-semibold"
+              className="flex items-center gap-1 text-xs text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-xl border border-blue-200 transition-all font-bold"
             >
               <ArrowLeft size={13} />
               <span>Doctor Station</span>
@@ -284,7 +284,7 @@ export default function Chat() {
           ) : (
             <Link
               to="/drive"
-              className="flex items-center gap-1 text-xs text-cyan-300 hover:text-white glass px-3 py-1.5 rounded-xl border border-cyan-500/30 transition-all font-semibold"
+              className="flex items-center gap-1 text-xs text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-xl border border-blue-200 transition-all font-bold"
             >
               <span>My DigiLocker</span>
               <ChevronRight size={13} />
@@ -294,22 +294,22 @@ export default function Chat() {
       </div>
 
       {/* Main Conversation Box */}
-      <div className="glass rounded-2xl border border-slate-800 flex-1 flex flex-col overflow-hidden shadow-2xl relative">
+      <div className="bg-white rounded-2xl border border-slate-200/80 flex-1 flex flex-col overflow-hidden shadow-xs relative">
         {/* Messages Scroll Area */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
           {/* Welcome Card if no messages */}
           {messages.length === 0 && !loading && (
             <div className="h-full flex flex-col items-center justify-center text-center max-w-xl mx-auto space-y-6 py-8">
-              <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-cyan-500/20 via-teal-500/20 to-indigo-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shadow-xl shadow-cyan-500/10">
+              <div className="w-16 h-16 rounded-3xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shadow-xs">
                 <Sparkles size={32} />
               </div>
               <div className="space-y-2">
-                <h2 className="text-xl font-bold text-slate-100">
+                <h2 className="text-xl font-extrabold text-slate-900">
                   {isDoctor
                     ? `Hello ${session.name}, how can Copilot assist you?`
                     : `Hello ${session.name || 'there'}, how are you feeling today?`}
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-medium">
                   {isDoctor
                     ? 'Review clinical doubts, generate diagnostic summaries, or write direct patient guidance.'
                     : 'Ask anything about your medical documents, lab tests, prescriptions, or share any emotional stress you are experiencing.'}
@@ -327,12 +327,12 @@ export default function Chat() {
                         setSelectedCategory(q.category);
                         handleSendMessage(q.text);
                       }}
-                      className="glass text-left p-3.5 rounded-xl border border-slate-800 hover:border-cyan-500/40 hover:bg-slate-800/50 transition-all group flex items-start gap-3"
+                      className="bg-slate-50/80 text-left p-3.5 rounded-xl border border-slate-200/80 hover:border-blue-300 hover:bg-blue-50/50 transition-all group flex items-start gap-3 shadow-xs"
                     >
-                      <div className="p-2 rounded-lg bg-slate-800/80 text-cyan-400 group-hover:text-cyan-300 group-hover:bg-cyan-500/10 transition-colors shrink-0">
+                      <div className="p-2 rounded-lg bg-blue-50 text-blue-600 group-hover:bg-blue-100 transition-colors shrink-0">
                         <Icon size={16} />
                       </div>
-                      <span className="text-xs text-slate-300 font-medium group-hover:text-white leading-snug">
+                      <span className="text-xs text-slate-800 font-semibold group-hover:text-blue-900 leading-snug">
                         {q.text}
                       </span>
                     </button>
@@ -341,8 +341,8 @@ export default function Chat() {
               </div>
 
               {/* Safety banner */}
-              <div className="flex items-center gap-2 text-[11px] text-slate-500 bg-slate-900/60 px-4 py-2 rounded-xl border border-slate-800/80">
-                <ShieldCheck size={14} className="text-teal-400 shrink-0" />
+              <div className="flex items-center gap-2 text-[11px] text-slate-500 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200 font-medium">
+                <ShieldCheck size={14} className="text-blue-600 shrink-0" />
                 <span>
                   Private & Secure • For educational & emotional support • Always follow your physician's clinical advice
                 </span>
@@ -365,22 +365,22 @@ export default function Chat() {
                   className={cn(
                     'max-w-[88%] sm:max-w-[80%] rounded-2xl p-4 sm:p-5 relative transition-all text-sm leading-relaxed',
                     isUser
-                      ? 'bg-gradient-to-br from-cyan-600 to-teal-700 text-white shadow-lg shadow-cyan-900/20 rounded-br-sm'
+                      ? 'bg-blue-600 text-white shadow-xs rounded-br-xs'
                       : isDoc
-                      ? 'glass bg-indigo-950/40 border border-indigo-500/40 text-slate-100 shadow-lg shadow-indigo-950/30 rounded-bl-sm'
-                      : 'glass-strong border border-slate-700/80 text-slate-100 shadow-xl rounded-bl-sm'
+                      ? 'bg-indigo-50 border border-indigo-200 text-indigo-950 shadow-xs rounded-bl-xs'
+                      : 'bg-slate-50 border border-slate-200 text-slate-850 shadow-xs rounded-bl-xs'
                   )}
                 >
                   {/* Sender Header */}
-                  <div className="flex items-center justify-between gap-3 mb-2 pb-1.5 border-b border-white/10 text-xs">
+                  <div className="flex items-center justify-between gap-3 mb-2 pb-1.5 border-b border-black/5 text-xs">
                     <div className="flex items-center gap-2">
                       {isAI && (
-                        <div className="w-5 h-5 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold">
+                        <div className="w-5 h-5 rounded-md bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
                           <Bot size={13} />
                         </div>
                       )}
                       {isDoc && (
-                        <div className="w-5 h-5 rounded-md bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">
+                        <div className="w-5 h-5 rounded-md bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
                           <Stethoscope size={13} />
                         </div>
                       )}
@@ -389,19 +389,19 @@ export default function Chat() {
                           <User size={13} />
                         </div>
                       )}
-                      <span className="font-bold tracking-tight">
-                        {isAI ? 'HealthCopilot AI' : m.sender_name}
+                      <span className="font-extrabold tracking-tight">
+                        {isAI ? 'Carefolio AI' : m.sender_name}
                       </span>
                       {isDoc && (
-                        <span className="text-[10px] bg-indigo-500/30 text-indigo-200 px-1.5 py-0.2 rounded border border-indigo-500/40 font-semibold">
+                        <span className="text-[10px] bg-indigo-100 text-indigo-800 px-1.5 py-0.2 rounded border border-indigo-200 font-bold">
                           Verified Clinician
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-2 text-[11px] opacity-75">
+                    <div className="flex items-center gap-2 text-[11px] opacity-75 font-medium">
                       {m.category && (
-                        <span className="uppercase text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/20">
+                        <span className="uppercase text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-black/5">
                           {m.category}
                         </span>
                       )}
@@ -412,18 +412,21 @@ export default function Chat() {
                   </div>
 
                   {/* Message Body */}
-                  <div className="whitespace-pre-line text-xs sm:text-sm font-normal text-slate-200">
+                  <div className={cn(
+                    'whitespace-pre-line text-xs sm:text-sm font-normal leading-relaxed',
+                    isUser ? 'text-white' : 'text-slate-800'
+                  )}>
                     {m.message}
                   </div>
 
                   {/* Actions for AI messages (Speech & Copy) */}
                   {isAI && (
-                    <div className="flex items-center justify-end gap-2 mt-3 pt-2 border-t border-slate-800/80 text-xs text-slate-400">
+                    <div className="flex items-center justify-end gap-2 mt-3 pt-2 border-t border-slate-200 text-xs text-slate-500">
                       <button
                         onClick={() => handleToggleSpeak(m.id, m.message)}
                         className={cn(
-                          'p-1.5 rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-1 text-[11px]',
-                          isSpeaking === m.id ? 'text-cyan-400 bg-cyan-500/10' : 'text-slate-400 hover:text-slate-200'
+                          'p-1.5 rounded-lg hover:bg-slate-200/60 transition-colors flex items-center gap-1 text-[11px] font-medium',
+                          isSpeaking === m.id ? 'text-blue-700 bg-blue-100' : 'text-slate-500 hover:text-slate-800'
                         )}
                         title={isSpeaking === m.id ? 'Stop Voice' : 'Listen to Explanation'}
                       >
@@ -433,10 +436,10 @@ export default function Chat() {
 
                       <button
                         onClick={() => handleCopy(m.id, m.message)}
-                        className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1 text-[11px]"
+                        className="p-1.5 rounded-lg hover:bg-slate-200/60 text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1 text-[11px] font-medium"
                         title="Copy to Clipboard"
                       >
-                        {copiedId === m.id ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
+                        {copiedId === m.id ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
                         <span>{copiedId === m.id ? 'Copied' : 'Copy'}</span>
                       </button>
                     </div>
@@ -449,16 +452,16 @@ export default function Chat() {
           {/* Typing indicator */}
           {isSending && (
             <div className="flex items-start gap-3">
-              <div className="glass-strong border border-slate-700/80 rounded-2xl p-4 flex items-center gap-3">
-                <div className="w-5 h-5 rounded-md bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold">
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center gap-3 shadow-xs">
+                <div className="w-5 h-5 rounded-md bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
                   <Bot size={13} />
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
-                <span className="text-xs text-slate-400 font-medium">HealthCopilot is thinking...</span>
+                <span className="text-xs text-slate-500 font-semibold">Carefolio is thinking...</span>
               </div>
             </div>
           )}
@@ -466,15 +469,15 @@ export default function Chat() {
           {/* Follow-up question chips */}
           {followups.length > 0 && !isSending && (
             <div className="space-y-1.5 pt-2">
-              <p className="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
-                <Sparkles size={12} className="text-cyan-400" /> Suggested Follow-ups:
+              <p className="text-[11px] font-bold text-slate-600 flex items-center gap-1">
+                <Sparkles size={12} className="text-blue-600" /> Suggested Follow-ups:
               </p>
               <div className="flex flex-wrap gap-2">
                 {followups.map((f, i) => (
                   <button
                     key={i}
                     onClick={() => handleSendMessage(f)}
-                    className="text-xs glass px-3 py-1.5 rounded-xl border border-slate-700 hover:border-cyan-500/40 hover:bg-slate-800/80 text-cyan-300 font-medium transition-all"
+                    className="text-xs bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50 text-blue-700 font-semibold transition-all shadow-xs"
                   >
                     {f}
                   </button>
@@ -487,11 +490,11 @@ export default function Chat() {
         </div>
 
         {/* Input Bar Section */}
-        <div className="p-3 sm:p-4 glass-strong border-t border-slate-800 space-y-3 shrink-0">
+        <div className="p-3 sm:p-4 bg-white border-t border-slate-200 space-y-3 shrink-0">
           {/* Category Switcher & Role Mode */}
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-[11px] text-slate-400 font-semibold mr-1">Topic:</span>
+              <span className="text-[11px] text-slate-500 font-bold mr-1">Topic:</span>
               {CATEGORIES.map((cat) => {
                 const Icon = cat.icon;
                 const active = selectedCategory === cat.id;
@@ -501,8 +504,8 @@ export default function Chat() {
                     type="button"
                     onClick={() => setSelectedCategory(cat.id)}
                     className={cn(
-                      'flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border transition-all font-medium',
-                      active ? cat.color : 'text-slate-400 border-slate-800 hover:border-slate-700 bg-slate-900/60'
+                      'flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg border transition-all font-bold',
+                      active ? cat.color : 'text-slate-600 border-slate-200 hover:bg-slate-100 bg-white'
                     )}
                   >
                     <Icon size={12} />
@@ -514,13 +517,13 @@ export default function Chat() {
 
             {/* If Doctor, allow toggling AI Copilot vs Direct Reply */}
             {isDoctor && (
-              <div className="flex items-center gap-1 glass p-0.5 rounded-lg border border-slate-800 text-[11px]">
+              <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-[11px]">
                 <button
                   type="button"
                   onClick={() => setDoctorMode('ai')}
                   className={cn(
-                    'px-2 py-0.5 rounded-md font-semibold transition-all',
-                    doctorMode === 'ai' ? 'bg-cyan-500/20 text-cyan-300' : 'text-slate-400'
+                    'px-2 py-0.5 rounded-md font-bold transition-all',
+                    doctorMode === 'ai' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600'
                   )}
                 >
                   Consult AI
@@ -529,8 +532,8 @@ export default function Chat() {
                   type="button"
                   onClick={() => setDoctorMode('doctor_direct')}
                   className={cn(
-                    'px-2 py-0.5 rounded-md font-semibold transition-all',
-                    doctorMode === 'doctor_direct' ? 'bg-indigo-500/20 text-indigo-300' : 'text-slate-400'
+                    'px-2 py-0.5 rounded-md font-bold transition-all',
+                    doctorMode === 'doctor_direct' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600'
                   )}
                 >
                   Reply as Doctor
@@ -540,7 +543,7 @@ export default function Chat() {
           </div>
 
           {/* Text Area & Send Action */}
-          <div className="flex items-end gap-2 bg-slate-900/90 rounded-2xl border border-slate-700/80 focus-within:border-cyan-500/60 focus-within:ring-1 focus-within:ring-cyan-500/30 p-2 transition-all">
+          <div className="flex items-end gap-2 bg-slate-50 rounded-2xl border border-slate-200 focus-within:border-blue-600 focus-within:bg-white p-2 transition-all">
             <textarea
               ref={inputRef}
               value={inputText}
@@ -552,7 +555,7 @@ export default function Chat() {
                   : 'Ask a medical doubt, prescription question, or how you are feeling...'
               }
               rows={1}
-              className="w-full bg-transparent text-sm text-slate-100 placeholder-slate-500 resize-none focus:outline-none max-h-32 min-h-[38px] py-1.5 px-2"
+              className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 resize-none focus:outline-none max-h-32 min-h-[38px] py-1.5 px-2 font-sans"
             />
 
             <button
@@ -561,8 +564,8 @@ export default function Chat() {
               className={cn(
                 'p-2.5 rounded-xl font-bold transition-all shrink-0 flex items-center justify-center',
                 inputText.trim() && !isSending
-                  ? 'bg-gradient-to-r from-cyan-500 to-teal-400 text-slate-950 shadow-md shadow-cyan-500/20 hover:scale-105 active:scale-95'
-                  : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-xs'
+                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
               )}
               title="Send message (Enter)"
             >
@@ -570,10 +573,10 @@ export default function Chat() {
             </button>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-500 px-1">
+          <div className="flex items-center justify-between text-[11px] text-slate-500 px-1 font-medium">
             <span>Press Enter to send, Shift+Enter for new line</span>
-            <span className="flex items-center gap-1">
-              <AlertCircle size={11} className="text-amber-400" />
+            <span className="flex items-center gap-1 text-slate-500">
+              <AlertCircle size={11} className="text-amber-500" />
               Not for life-threatening emergencies (call 112 / 911)
             </span>
           </div>

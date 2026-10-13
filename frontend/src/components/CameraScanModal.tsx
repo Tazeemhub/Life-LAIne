@@ -157,46 +157,46 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-      <div className="relative w-full max-w-2xl glass rounded-2xl border border-slate-700/80 p-6 shadow-2xl flex flex-col max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+      <div className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 p-6 shadow-2xl flex flex-col max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-200">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600">
               <Camera size={18} />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-100">Camera & Xerox Scanner</h2>
-              <p className="text-xs text-slate-400">Capture prescription or lab photocopy with high-contrast text enhancement</p>
+              <h2 className="text-base font-bold text-slate-900">Camera & Xerox Scanner</h2>
+              <p className="text-xs text-slate-500">Capture prescription or lab photocopy with high-contrast text enhancement</p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"
           >
             <X size={18} />
           </button>
         </div>
 
         {/* Viewport Area */}
-        <div className="my-5 flex-1 min-h-[300px] flex flex-col items-center justify-center bg-slate-900/80 rounded-xl border border-slate-800 overflow-hidden relative">
+        <div className="my-5 flex-1 min-h-[300px] flex flex-col items-center justify-center bg-slate-50 rounded-xl border border-slate-200 overflow-hidden relative">
           {!capturedImage && !isCameraActive && (
             <div className="p-8 text-center space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto text-amber-400">
+              <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center mx-auto text-blue-600 shadow-2xs">
                 <ImageIcon size={30} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-slate-200">Take a Snapshot or Upload a Photo</p>
+                <p className="text-sm font-bold text-slate-900">Take a Snapshot or Upload a Photo</p>
                 <p className="text-xs text-slate-500 mt-1 max-w-sm">
-                  Use your camera to capture physical paper slips, or select an existing phone photo to apply the Xerox enhancement filter.
+                  Use your camera to capture physical paper slips, or select an existing photo to apply the Xerox enhancement filter.
                 </p>
               </div>
               <div className="flex items-center justify-center gap-3 pt-2 flex-wrap">
                 <button
                   type="button"
                   onClick={startCamera}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-semibold text-xs rounded-xl transition-all shadow-md"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs rounded-xl transition-all shadow-xs"
                 >
                   <Camera size={15} />
                   <span>Start Live Camera</span>
@@ -204,7 +204,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="flex items-center gap-2 px-4 py-2 glass hover:bg-slate-800 text-slate-200 font-medium text-xs rounded-xl border border-slate-700 transition-all"
+                  className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs rounded-xl border border-slate-300 transition-all shadow-2xs"
                 >
                   <Upload size={15} />
                   <span>Choose Photo File</span>
@@ -233,7 +233,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                 <button
                   type="button"
                   onClick={handleCapture}
-                  className="w-14 h-14 rounded-full bg-white border-4 border-amber-500 flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all text-slate-900"
+                  className="w-14 h-14 rounded-full bg-white border-4 border-blue-600 flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all text-blue-600"
                   title="Capture snapshot"
                 >
                   <Camera size={22} />
@@ -241,7 +241,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                 <button
                   type="button"
                   onClick={stopCamera}
-                  className="px-3 py-1.5 glass rounded-lg text-xs text-slate-300 hover:text-white border border-slate-700"
+                  className="px-3 py-1.5 bg-white rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-100 border border-slate-300 shadow-2xs"
                 >
                   Cancel
                 </button>
@@ -254,7 +254,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
             <div className="w-full flex flex-col items-center p-2">
               <canvas
                 ref={processedCanvasRef}
-                className="max-h-[380px] w-auto max-w-full rounded-lg border border-slate-700 shadow-lg object-contain"
+                className="max-h-[380px] w-auto max-w-full rounded-lg border border-slate-300 shadow-md object-contain"
               />
             </div>
           )}
@@ -262,10 +262,10 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
 
         {/* Filter Selection Controls (Visible when image captured) */}
         {capturedImage && (
-          <div className="space-y-4 pt-2 border-t border-slate-800">
+          <div className="space-y-4 pt-2 border-t border-slate-200">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-300">
-                <Sliders size={14} className="text-amber-400" />
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
+                <Sliders size={14} className="text-blue-600" />
                 <span>Document Enhancement Filters:</span>
               </div>
               <button
@@ -274,7 +274,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                   setCapturedImage(null);
                   startCamera();
                 }}
-                className="flex items-center gap-1.5 text-xs text-slate-400 hover:text-amber-400 transition-colors"
+                className="flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-800 transition-colors font-semibold"
               >
                 <RefreshCw size={12} />
                 <span>Retake</span>
@@ -294,11 +294,11 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                   onClick={() => setFilter(f.id as FilterType)}
                   className={`p-2.5 rounded-xl text-left border transition-all ${
                     filter === f.id
-                      ? 'bg-amber-500/20 border-amber-500 text-amber-300'
-                      : 'glass border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-blue-50 border-blue-600 text-blue-900 shadow-2xs'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
-                  <p className="text-xs font-semibold">{f.label}</p>
+                  <p className="text-xs font-bold">{f.label}</p>
                   <p className="text-[10px] text-slate-500 mt-0.5">{f.desc}</p>
                 </button>
               ))}
@@ -307,13 +307,13 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
             {/* Tags & Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3">
               <div className="flex items-center gap-2 w-full sm:w-auto">
-                <span className="text-xs text-slate-400">Tags:</span>
+                <span className="text-xs text-slate-600 font-medium">Tags:</span>
                 <input
                   type="text"
                   value={customTags}
                   onChange={(e) => setCustomTags(e.target.value)}
                   placeholder="e.g. xerox, lab, urgent"
-                  className="text-xs bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1 text-slate-200 focus:outline-none focus:border-amber-500"
+                  className="text-xs bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-1 text-slate-900 focus:bg-white focus:outline-none focus:border-blue-600"
                 />
               </div>
 
@@ -321,7 +321,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 glass rounded-xl text-xs text-slate-400 hover:text-white border border-slate-800"
+                  className="px-4 py-2 bg-white hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-700 border border-slate-300 shadow-2xs"
                 >
                   Cancel
                 </button>
@@ -329,7 +329,7 @@ export default function CameraScanModal({ isOpen, onClose, onUploaded }: CameraS
                   type="button"
                   onClick={handleSaveAndUpload}
                   disabled={uploading}
-                  className="flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg transition-all disabled:opacity-50"
+                  className="flex items-center gap-2 px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all disabled:opacity-50"
                 >
                   {uploading ? (
                     <RefreshCw size={14} className="animate-spin" />

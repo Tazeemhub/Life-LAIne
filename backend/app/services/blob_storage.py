@@ -19,8 +19,24 @@ class BlobStorageService:
     def __init__(self):
         self.use_azure = bool(settings.azure_storage_connection_string) and settings.use_azure_storage
         self.container_name = settings.azure_storage_container
-        self.local_path = Path(settings.storage_path)
-        self.local_path.mkdir(parents=True, exist_ok=True)
+
+        is_serverless = bool(os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"))
+        is_readonly = not os.access(".", os.W_OK)
+
+        if is_serverless or is_readonly:
+            self.local_path = Path("/tmp/uploads")
+        else:
+            self.local_path = Path(settings.storage_path)
+
+        try:
+            self.local_path.mkdir(parents=True, exist_ok=True)
+        except Exception as e:
+            logger.warning(f"Could not create storage path {self.local_path}, falling back to /tmp/uploads: {e}")
+            self.local_path = Path("/tmp/uploads")
+            try:
+                self.local_path.mkdir(parents=True, exist_ok=True)
+            except Exception:
+                pass
 
         if self.use_azure:
             try:
@@ -63,6 +79,11 @@ class BlobStorageService:
         return f"https://{client.account_name}.blob.core.windows.net/{self.container_name}/{blob_name}"
 
     async def _upload_local(self, file_bytes: bytes, filename: str) -> str:
+        try:
+            self.local_path.mkdir(parents=True, exist_ok=True)
+        except Exception:
+            self.local_path = Path("/tmp/uploads")
+            self.local_path.mkdir(parents=True, exist_ok=True)
         dest = self.local_path / filename
         dest.write_bytes(file_bytes)
         return str(dest)
@@ -72,7 +93,12 @@ class BlobStorageService:
         if url_or_path.startswith("https://"):
             return await self._download_azure(url_or_path)
         else:
-            return Path(url_or_path).read_bytes()
+            p = Path(url_or_path)
+            if not p.exists():
+                tmp_p = Path("/tmp/uploads") / p.name
+                if tmp_p.exists():
+                    return tmp_p.read_bytes()
+            return p.read_bytes()
 
     async def _download_azure(self, url: str) -> bytes:
         from azure.storage.blob.aio import BlobClient

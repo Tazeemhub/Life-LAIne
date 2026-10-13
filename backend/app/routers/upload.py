@@ -13,13 +13,17 @@ from app.services.auth import get_current_patient
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["upload"])
 
+import os
+
 ALLOWED_CONTENT_TYPES = {
     "application/pdf",
     "image/jpeg",
     "image/jpg",
     "image/png",
     "image/tiff",
+    "image/webp",
     "text/plain",
+    "application/octet-stream",
 }
 MAX_FILE_SIZE = 20 * 1024 * 1024  # 20 MB
 
@@ -37,10 +41,27 @@ async def upload_document(
 ):
     """Upload a medical document, scan, or xerox for processing and storage in DigiLocker drive."""
     content_type = file.content_type or "application/octet-stream"
+
+    # Infer real content type from file extension if octet-stream
+    if content_type == "application/octet-stream" and file.filename:
+        low = file.filename.lower()
+        if low.endswith(".pdf"):
+            content_type = "application/pdf"
+        elif low.endswith((".jpg", ".jpeg")):
+            content_type = "image/jpeg"
+        elif low.endswith(".png"):
+            content_type = "image/png"
+        elif low.endswith(".webp"):
+            content_type = "image/webp"
+        elif low.endswith((".tif", ".tiff")):
+            content_type = "image/tiff"
+        elif low.endswith(".txt"):
+            content_type = "text/plain"
+
     if content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(
             status_code=400,
-            detail=f"Unsupported file type: {content_type}. Allowed: PDF, JPEG, PNG, TIFF.",
+            detail=f"Unsupported file type: {content_type}. Allowed: PDF, JPEG, PNG, TIFF, WEBP.",
         )
 
     file_bytes = await file.read()
@@ -78,14 +99,34 @@ async def upload_document(
     await db.commit()
     logger.info(f"Document {doc_id} created in folder '{target_folder}' for patient {patient.id}")
 
-    # Kick off background processing
-    background_tasks.add_task(
-        process_document,
-        doc_id,
-        file_bytes,
-        content_type,
-        patient.preferred_language,
-        AsyncSessionLocal,
-    )
-
-    return UploadResponse(document_id=doc_id, status="processing")
+    is_serverless = bool(os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"))
+    if is_serverless:
+        # On Vercel serverless functions, background tasks freeze once the HTTP response is sent.
+        # Run processing inline so OCR, Gemini analysis, and summaries complete within the invocation.
+        try:
+            await process_document(
+                doc_id,
+                file_bytes,
+                content_type,
+                patient.preferred_language,
+                AsyncSessionLocal,
+            )
+            return UploadResponse(
+                document_id=doc_id,
+                status="completed",
+                message="Document uploaded and processed successfully."
+            )
+        except Exception as e:
+            logger.error(f"Inline serverless processing error: {e}", exc_info=True)
+            return UploadResponse(document_id=doc_id, status="processing")
+    else:
+        # Kick off background processing on regular Uvicorn server
+        background_tasks.add_task(
+            process_document,
+            doc_id,
+            file_bytes,
+            content_type,
+            patient.preferred_language,
+            AsyncSessionLocal,
+        )
+        return UploadResponse(document_id=doc_id, status="processing")

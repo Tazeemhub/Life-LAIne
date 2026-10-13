@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
-/* ── Design tokens ──────────────────────────────────────────── */
+/* ── Carefolio Polished Blue, White & Near-Black Design Tokens ── */
 @theme {
-  --color-background: hsl(222 47% 6%);
-  --color-surface: hsl(222 47% 9%);
-  --color-surface-2: hsl(223 47% 14%);
-  --color-border: hsl(216 34% 17%);
-  --color-text: hsl(213 31% 91%);
-  --color-muted: hsl(215 20% 55%);
-  --color-primary: hsl(199 89% 48%);
-  --color-primary-light: hsl(199 89% 55%);
-  --color-accent: hsl(172 66% 50%);
+  --color-background: hsl(210 40% 98%);
+  --color-surface: hsl(0 0% 100%);
+  --color-surface-2: hsl(210 40% 96%);
+  --color-border: hsl(214 32% 91%);
+  --color-text: hsl(222 47% 11%);
+  --color-muted: hsl(215 16% 47%);
+  --color-primary: hsl(221 83% 53%);
+  --color-primary-light: hsl(217 91% 60%);
+  --color-accent: hsl(199 89% 48%);
   --color-destructive: hsl(0 84% 60%);
   --color-warning: hsl(38 92% 50%);
   --color-success: hsl(142 76% 36%);
-  --font-sans: "Inter", "system-ui", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --radius-xl: 0.75rem;
   --radius-2xl: 1rem;
 }
@@ -25,81 +25,111 @@
 }
 
 html {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: hsl(222 47% 6%);
-  color: hsl(213 31% 91%);
+  background-color: #f8fafc;
+  color: #0f172a;
   min-height: 100vh;
   background-image:
-    radial-gradient(ellipse at 20% 50%, hsl(199 89% 48% / 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, hsl(172 66% 50% / 0.05) 0%, transparent 50%);
+    radial-gradient(ellipse at 15% 10%, rgba(219, 234, 254, 0.45) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 75%, rgba(224, 242, 254, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(241, 245, 249, 0.8) 0%, transparent 60%);
+  background-attachment: fixed;
 }
 
 ::selection {
-  background: hsl(199 89% 48% / 0.3);
+  background: rgba(37, 99, 235, 0.18);
+  color: #1e3a8a;
 }
 
-/* ── Utility classes ────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* ── Polished Light Utilities ───────────────────────────────── */
 .glass {
-  background: hsl(222 47% 9% / 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid hsl(216 34% 17%);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
 }
 
 .glass-strong {
-  background: hsl(222 47% 7% / 0.95);
-  backdrop-filter: blur(30px);
-  border: 1px solid hsl(216 34% 20%);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.05);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, hsl(199 89% 55%), hsl(172 66% 55%));
+  background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .card-hover {
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-hover:hover {
-  border-color: hsl(199 89% 48% / 0.4);
-  box-shadow: 0 0 0 1px hsl(199 89% 48% / 0.2), 0 8px 32px hsl(199 89% 48% / 0.1);
-  transform: translateY(-1px);
+  border-color: #bfdbfe;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+  transform: translateY(-2px);
 }
 
-/* ── Flag colors ────────────────────────────────────────────── */
+/* ── Lab Result Flag Badges (High Contrast Light Mode) ─────── */
 .flag-h {
-  color: hsl(0 84% 70%);
-  background: hsl(0 84% 60% / 0.1);
-  border-color: hsl(0 84% 60% / 0.3);
+  color: #b91c1c;
+  background: #fef2f2;
+  border-color: #fecaca;
+  font-weight: 600;
 }
 .flag-l {
-  color: hsl(210 100% 70%);
-  background: hsl(210 100% 60% / 0.1);
-  border-color: hsl(210 100% 60% / 0.3);
+  color: #1d4ed8;
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  font-weight: 600;
 }
 .flag-hh {
-  color: hsl(0 84% 60%);
-  background: hsl(0 84% 50% / 0.15);
-  border-color: hsl(0 84% 50% / 0.4);
+  color: #991b1b;
+  background: #fee2e2;
+  border-color: #f87171;
+  font-weight: 700;
 }
 .flag-ll {
-  color: hsl(210 100% 60%);
-  background: hsl(210 100% 50% / 0.15);
-  border-color: hsl(210 100% 50% / 0.4);
+  color: #1e40af;
+  background: #dbeafe;
+  border-color: #93c5fd;
+  font-weight: 700;
 }
 .flag-n {
-  color: hsl(142 76% 55%);
-  background: hsl(142 76% 36% / 0.1);
-  border-color: hsl(142 76% 36% / 0.3);
+  color: #15803d;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  font-weight: 600;
 }
 
-/* ── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
+/* ── Custom Polished Scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 7px; height: 7px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: hsl(216 34% 25%); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: hsl(199 89% 48% / 0.5); }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Accessibility & Reduced Motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

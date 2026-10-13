@@ -97,6 +97,18 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
   }, [upsertDocument, onProcessingDone]);
 
   const processFile = useCallback(async (file: File) => {
+    // Vercel serverless functions enforce a 4.5 MB maximum request payload limit
+    if (file.size > 4.5 * 1024 * 1024) {
+      const fileEntry: UploadedFile = {
+        name: file.name,
+        status: 'error',
+        progress: 0,
+        error: 'File exceeds 4.5 MB limit for serverless deployment. Please select a document under 4.5 MB.',
+      };
+      setFiles((prev) => [...prev, fileEntry]);
+      return;
+    }
+
     const fileEntry: UploadedFile = { name: file.name, status: 'uploading', progress: 0 };
     setFiles((prev) => [...prev, fileEntry]);
 
@@ -112,9 +124,11 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
         updateFile({ progress: pct });
       });
 
+      const isImmediatelyDone = response.status === 'completed';
+
       updateFile({
         documentId: response.document_id,
-        status: 'processing',
+        status: isImmediatelyDone ? 'done' : 'processing',
         progress: 100,
       });
 
@@ -122,18 +136,24 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
       upsertDocument({
         id: response.document_id,
         filename: file.name,
-        status: 'processing',
+        status: response.status || 'processing',
         created_at: now,
       });
 
-      // Poll for background completion with safe cleanup
+      // Poll for background completion or fetch final details
       pollDocument(response.document_id, file.name);
       onUploadComplete?.(response.document_id);
+      if (isImmediatelyDone) {
+        onProcessingDone?.(response.document_id);
+      }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Upload failed';
-      updateFile({ status: 'error', error: msg });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const axiosErr = err as any;
+      const detail = axiosErr?.response?.data?.detail;
+      const msg = detail || (err instanceof Error ? err.message : 'Upload failed');
+      updateFile({ status: 'error', error: String(msg) });
     }
-  }, [upsertDocument, pollDocument, onUploadComplete]);
+  }, [upsertDocument, pollDocument, onUploadComplete, onProcessingDone]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -167,37 +187,37 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
       <div
         {...getRootProps()}
         className={cn(
-          'relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-300',
+          'relative border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all duration-300 bg-white shadow-xs',
           isDragActive
-            ? 'border-cyan-400 bg-cyan-500/10 scale-[1.01]'
-            : 'border-slate-700 hover:border-cyan-500/50 hover:bg-cyan-500/5'
+            ? 'border-blue-600 bg-blue-50/70 scale-[1.01]'
+            : 'border-slate-300 hover:border-blue-500 hover:bg-blue-50/30'
         )}
       >
         <input {...getInputProps()} />
         <div className="flex flex-col items-center gap-4">
           <div
             className={cn(
-              'w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-md',
-              isDragActive ? 'bg-cyan-500/30' : 'bg-slate-800'
+              'w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs border',
+              isDragActive ? 'bg-blue-600 text-white border-blue-600' : 'bg-blue-50 text-blue-600 border-blue-100'
             )}
           >
-            <Upload size={26} className={isDragActive ? 'text-cyan-300' : 'text-slate-400'} />
+            <Upload size={26} className={isDragActive ? 'text-white' : 'text-blue-600'} />
           </div>
           <div>
-            <p className="text-base sm:text-lg font-semibold text-slate-200">
-              {isDragActive ? 'Drop your files here!' : 'Drag & drop medical documents'}
+            <p className="text-base sm:text-lg font-bold text-slate-900">
+              {isDragActive ? 'Drop your medical files here!' : 'Drag & drop medical records'}
             </p>
             <p className="text-sm text-slate-500 mt-1">
-              or <span className="text-cyan-400 font-medium">browse local files</span> (PDF, JPEG, PNG, TXT up to 20MB)
+              or <span className="text-blue-600 font-semibold underline underline-offset-2">browse files</span> (PDF, JPEG, PNG, TXT up to 20MB)
             </p>
           </div>
         </div>
 
         {/* Demo Sample Presets */}
-        <div className="mt-6 pt-5 border-t border-slate-800/80" onClick={(e) => e.stopPropagation()}>
-          <div className="flex items-center justify-center gap-1.5 text-xs font-medium text-slate-400 mb-3">
-            <Sparkles size={14} className="text-cyan-400" />
-            <span>Or test with a sample record (1-click load):</span>
+        <div className="mt-6 pt-5 border-t border-slate-200/90" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-600 mb-3">
+            <Sparkles size={14} className="text-blue-600" />
+            <span>Or test immediately with a realistic sample record:</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-left">
             {SAMPLE_DOCUMENTS.map((s) => (
@@ -205,17 +225,17 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
                 key={s.id}
                 type="button"
                 onClick={(e) => handleLoadSample(s, e)}
-                className="group p-3 rounded-xl bg-slate-900/90 hover:bg-cyan-950/40 border border-slate-800 hover:border-cyan-500/40 transition-all text-left"
+                className="group p-3 rounded-xl bg-slate-50/80 hover:bg-blue-50/60 border border-slate-200/90 hover:border-blue-300 transition-all text-left shadow-2xs"
               >
                 <div className="flex items-center justify-between gap-1 mb-1">
-                  <span className="text-[11px] font-semibold text-cyan-400 uppercase tracking-wider">
+                  <span className="text-[10px] font-bold text-blue-700 bg-blue-100/70 px-1.5 py-0.5 rounded uppercase tracking-wider">
                     {s.badge}
                   </span>
-                  <span className="text-[10px] text-slate-500 group-hover:text-cyan-300 transition-colors font-medium">
+                  <span className="text-[11px] text-blue-600 group-hover:text-blue-800 transition-colors font-semibold">
                     + Load
                   </span>
                 </div>
-                <p className="text-xs font-semibold text-slate-200 truncate group-hover:text-white">
+                <p className="text-xs font-bold text-slate-900 truncate group-hover:text-blue-700">
                   {s.name}
                 </p>
                 <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">
@@ -230,46 +250,46 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
       {files.length > 0 && (
         <div className="space-y-2">
           {files.map((f) => (
-            <div key={f.name} className="glass rounded-xl p-3.5 flex items-center gap-3">
-              <FileText size={18} className="text-slate-400 shrink-0" />
+            <div key={f.name} className="bg-white border border-slate-200 rounded-xl p-3.5 flex items-center gap-3 shadow-xs">
+              <FileText size={18} className="text-blue-600 shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-slate-200 truncate">{f.name}</p>
+                <p className="text-sm font-semibold text-slate-900 truncate">{f.name}</p>
                 {f.status === 'uploading' && (
-                  <div className="mt-1.5 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                  <div className="mt-1.5 h-1.5 bg-slate-100 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-cyan-500 to-teal-400 transition-all duration-300"
+                      className="h-full bg-blue-600 transition-all duration-300"
                       style={{ width: `${f.progress}%` }}
                     />
                   </div>
                 )}
                 {f.status === 'processing' && (
-                  <p className="text-xs text-cyan-400 mt-1 flex items-center gap-1.5 font-medium">
+                  <p className="text-xs text-blue-600 mt-1 flex items-center gap-1.5 font-semibold">
                     <Loader2 size={12} className="animate-spin" />
-                    Processing with AI…
+                    AI analyzing and extracting clinical fields…
                   </p>
                 )}
                 {f.status === 'done' && (
-                  <p className="text-xs text-green-400 mt-1 font-medium flex items-center gap-1">
-                    <CheckCircle size={12} /> Ready for review
+                  <p className="text-xs text-emerald-700 mt-1 font-semibold flex items-center gap-1">
+                    <CheckCircle size={12} /> Ready for clinical review
                   </p>
                 )}
                 {f.status === 'error' && (
-                  <p className="text-xs text-red-400 mt-1">{f.error}</p>
+                  <p className="text-xs text-rose-600 mt-1 font-medium">{f.error}</p>
                 )}
               </div>
               <div className="shrink-0 flex items-center gap-2">
-                {f.status === 'done' && <CheckCircle size={16} className="text-green-400" />}
+                {f.status === 'done' && <CheckCircle size={16} className="text-emerald-600" />}
                 {f.status === 'uploading' && (
-                  <span className="text-xs text-slate-400 font-mono">{f.progress}%</span>
+                  <span className="text-xs text-slate-500 font-mono font-medium">{f.progress}%</span>
                 )}
                 {f.status === 'processing' && (
-                  <Loader2 size={16} className="text-cyan-400 animate-spin" />
+                  <Loader2 size={16} className="text-blue-600 animate-spin" />
                 )}
                 <button
                   type="button"
                   onClick={() => removeFile(f.name)}
                   aria-label="Remove uploaded file item"
-                  className="text-slate-500 hover:text-slate-300 transition-colors p-1"
+                  className="text-slate-400 hover:text-slate-600 transition-colors p-1"
                 >
                   <X size={14} />
                 </button>

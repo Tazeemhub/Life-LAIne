@@ -32,9 +32,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500/30">
+      <div className="min-h-screen bg-slate-50/60 text-slate-900 selection:bg-blue-100 selection:text-blue-900 flex flex-col font-sans">
         <Navbar />
-        <main>
+        <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
