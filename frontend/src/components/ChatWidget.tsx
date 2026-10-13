@@ -15,19 +15,12 @@ import {
   Smile,
   Pill,
 } from 'lucide-react';
-import { useAppStore } from '../lib/store';
 import { getChatMessages, sendChatMessage } from '../lib/api';
 import type { ChatMessage } from '../lib/types';
 import { cn } from '../lib/utils';
 
 export default function ChatWidget() {
   const { pathname } = useLocation();
-  const session = useAppStore((s) => s.session);
-
-  // If already on the full Chat page, do not render duplicate widget
-  if (pathname === '/chat') {
-    return null;
-  }
 
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -102,6 +95,11 @@ export default function ChatWidget() {
     setIsSpeaking(msgId);
     window.speechSynthesis.speak(utterance);
   };
+
+  // If already on the full Chat page, do not render duplicate widget
+  if (pathname === '/chat') {
+    return null;
+  }
 
   const handleCopy = (id: string, text: string) => {
     navigator.clipboard.writeText(text);
