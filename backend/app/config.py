@@ -5,7 +5,7 @@ from typing import Optional
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+    model_config = SettingsConfigDict(env_file=(".env", "backend/.env", "../backend/.env"), env_file_encoding="utf-8", extra="ignore")
 
     @field_validator("gemini_api_key", "firebase_project_id", "firebase_credentials_path", mode="before")
     @classmethod
