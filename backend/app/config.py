@@ -1,4 +1,5 @@
-from pydantic import field_validator
+import os
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 from typing import Optional
@@ -17,10 +18,16 @@ class Settings(BaseSettings):
 
     # App
     environment: str = "development"
-    storage_path: str = "./uploads"
+    storage_path: str = Field(default_factory=lambda: (
+        "/tmp/uploads" if os.getenv("VERCEL") else "./uploads"
+    ))
 
     # Database (PostgreSQL / SQLite fallback)
-    database_url: str = "sqlite+aiosqlite:///./healthcopilot.db"
+    database_url: str = Field(default_factory=lambda: (
+        "sqlite+aiosqlite:////tmp/healthcopilot.db"
+        if os.getenv("VERCEL")
+        else "sqlite+aiosqlite:///./healthcopilot.db"
+    ))
 
     # Firebase Database (Firestore)
     use_firebase: bool = False
