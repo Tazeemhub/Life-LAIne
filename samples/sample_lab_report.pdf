@@ -1,0 +1,105 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 4176 >>
+stream
+BT
+/F1 9 Tf
+12 TL
+40 780 Td
+(METROPOLIS DIAGNOSTIC & PATHOLOGY LABORATORIES) Tj
+T* (NABL Accredited Laboratory | ISO 15189:2012 Certified) Tj
+T* (Main Diagnostic Center, Indiranagar, Bangalore - 560038) Tj
+T* (Toll Free: 1800 200 4567 | Email: reports@metropolisdx.com) Tj
+T* () Tj
+T* (================================================================================) Tj
+T* (COMPREHENSIVE BIOCHEMISTRY & HEMATOLOGY REPORT) Tj
+T* (================================================================================) Tj
+T* () Tj
+T* (PATIENT DETAILS:) Tj
+T* (Patient Name: Rajesh Kumar               Sample ID: DX-2026-99214) Tj
+T* (Age/Gender: 52 Y / Male                 Barcode: *DX99214*) Tj
+T* (Referred By: Dr. Sunita Rao, MD          Collection Date: 2026-03-12 07:30 AM) Tj
+T* (Sample Type: Whole Blood \(EDTA\) & Serum  Report Date: 2026-03-12 04:15 PM) Tj
+T* (Status: Final Verified Report) Tj
+T* () Tj
+T* (--------------------------------------------------------------------------------) Tj
+T* (TEST NAME                  RESULT       FLAG     UNITS       REFERENCE RANGE) Tj
+T* (--------------------------------------------------------------------------------) Tj
+T* () Tj
+T* (GLYCEMIC PROFILE) Tj
+T* (Fasting Blood Sugar \(FBS\)   148.0        HIGH     mg/dL       70.0 - 99.0) Tj
+T* (Post Prandial Sugar \(PPBS\)  210.5        HIGH     mg/dL       < 140.0) Tj
+T* (Glycated Hemoglobin \(HbA1c\) 8.2          HIGH     %           4.0 - 5.6 \(Normal\)) Tj
+T* (                                                              5.7 - 6.4 \(Prediabetes\)) Tj
+T* (                                                              >= 6.5 \(Diabetic\)) Tj
+T* (Average Blood Glucose \(eAG\) 188.6        HIGH     mg/dL       --) Tj
+T* () Tj
+T* (LIPID PROFILE) Tj
+T* (Total Cholesterol          224.0        HIGH     mg/dL       < 200.0) Tj
+T* (Triglycerides              192.0        HIGH     mg/dL       < 150.0) Tj
+T* (HDL Cholesterol \(Good\)      38.0        LOW      mg/dL       > 40.0) Tj
+T* (LDL Cholesterol \(Bad\)      147.6        HIGH     mg/dL       < 100.0 \(Optimal\)) Tj
+T* (VLDL Cholesterol            38.4        HIGH     mg/dL       < 30.0) Tj
+T* (Cholesterol/HDL Ratio       5.89        HIGH     ratio       < 4.5) Tj
+T* () Tj
+T* (RENAL FUNCTION TEST \(KIDNEY\)) Tj
+T* (Serum Creatinine            0.95        NORMAL   mg/dL       0.70 - 1.30) Tj
+T* (Blood Urea Nitrogen \(BUN\)  16.2        NORMAL   mg/dL       7.0 - 20.0) Tj
+T* (Estimated GFR \(CKD-EPI\)     89.0        NORMAL   mL/min/1.73 > 60.0) Tj
+T* (Serum Uric Acid             5.4         NORMAL   mg/dL       3.5 - 7.2) Tj
+T* () Tj
+T* (COMPLETE BLOOD COUNT \(CBC\)) Tj
+T* (Hemoglobin                  14.6        NORMAL   g/dL        13.0 - 17.0) Tj
+T* (Total Leukocyte Count \(WBC\) 7,200       NORMAL   cells/mcL   4,000 - 11,000) Tj
+T* (Platelet Count              240,000     NORMAL   cells/mcL   150,000 - 450,000) Tj
+T* (Packed Cell Volume \(PCV\)    44.2        NORMAL   %           40.0 - 50.0) Tj
+T* () Tj
+T* (LIVER FUNCTION TEST) Tj
+T* (SGOT / AST                  26.0        NORMAL   U/L         < 40.0) Tj
+T* (SGPT / ALT                  31.0        NORMAL   U/L         < 45.0) Tj
+T* (Alkaline Phosphatase \(ALP\)  78.0        NORMAL   U/L         40.0 - 129.0) Tj
+T* (Total Bilirubin             0.7         NORMAL   mg/dL       0.2 - 1.2) Tj
+T* () Tj
+T* (--------------------------------------------------------------------------------) Tj
+T* (PATHOLOGIST REMARKS & CLINICAL INTERPRETATION:) Tj
+T* (1. Fasting and postprandial hyperglycemia with HbA1c of 8.2% indicates suboptimal) Tj
+T* (   glycemic control over the past 90 days. Clinical correlation with medication) Tj
+T* (   adherence and dietary regimen recommended.) Tj
+T* (2. Atherogenic dyslipidemia pattern noted: elevated Total Cholesterol, LDL-C,) Tj
+T* (   Triglycerides, and borderline low HDL-C.) Tj
+T* (3. Renal and Hepatic functions are currently within normal baseline limits.) Tj
+T* () Tj
+T* (Verified by:) Tj
+T* (Dr. Ananya Sengupta, MD \(Pathology\)) Tj
+T* (Senior Consultant Pathologist) Tj
+T* (Registration No: KMC-31849) Tj
+T* (================================================================================) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000247 00000 n 
+0000004475 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+4543
+%%EOF

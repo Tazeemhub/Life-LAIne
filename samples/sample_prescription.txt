@@ -1,0 +1,76 @@
+APOLLO MULTISPECIALTY CLINIC
+Department of Internal Medicine
+104 Healthcare Boulevard, Bangalore, Karnataka - 560034
+License No: KA-MED-84920 | Phone: +91 80 4920 1100
+
+================================================================================
+PATIENT PRESCRIPTION
+================================================================================
+
+Date: 2026-03-15
+Patient Name: Rajesh Kumar
+Age: 52 Years | Sex: Male
+ABHA ID: 91-8472-9102-4412
+Patient ID: PT-2026-08149
+Consulting Physician: Dr. Sunita Rao, MD (Internal Medicine)
+Reg. No: KMC-49201
+
+CLINICAL DIAGNOSIS:
+1. Type 2 Diabetes Mellitus - poorly controlled
+2. Primary Essential Hypertension (Stage 1)
+3. Dyslipidemia
+
+VITAL SIGNS:
+- Blood Pressure: 138/88 mmHg
+- Heart Rate: 76 bpm
+- Weight: 78.5 kg | Height: 172 cm | BMI: 26.5 kg/m²
+- SpO2: 98% on room air
+
+PRESCRIPTION / MEDICATIONS:
+--------------------------------------------------------------------------------
+1. Tab. Metformin Hydrochloride 500 mg
+   - Route: Oral
+   - Dosage: 500 mg
+   - Frequency: Twice daily (BD) - with meals
+   - Duration: 90 days
+   - Instructions: Take immediately after breakfast and dinner. Do not skip meals.
+
+2. Tab. Lisinopril 10 mg
+   - Route: Oral
+   - Dosage: 10 mg
+   - Frequency: Once daily (OD) - morning
+   - Duration: 90 days
+   - Instructions: Take daily at 8:00 AM with water. Monitor blood pressure weekly.
+
+3. Tab. Atorvastatin 20 mg
+   - Route: Oral
+   - Dosage: 20 mg
+   - Frequency: Once daily (OD) - bedtime
+   - Duration: 90 days
+   - Instructions: Take at bedtime. Report any unexplained muscle soreness.
+
+4. Tab. Aspirin 75 mg (Enteric Coated)
+   - Route: Oral
+   - Dosage: 75 mg
+   - Frequency: Once daily (OD) - post lunch
+   - Duration: 90 days
+   - Instructions: Take after food.
+
+DIETARY & LIFESTYLE ADVICE:
+- Diabetic diet: Restrict refined carbohydrates, sugar, and high-glycemic foods.
+- Low-sodium diet (< 2g sodium/day).
+- 30 minutes brisk walking at least 5 days a week.
+- Maintain daily home fasting glucose log.
+
+RECOMMENDED INVESTIGATIONS (In 8 Weeks):
+- Fasting Blood Sugar (FBS) & Post Prandial (PPBS)
+- HbA1c
+- Serum Creatinine & eGFR
+- Lipid Profile
+
+NEXT FOLLOW-UP:
+May 15, 2026 (or earlier if persistent headache, dizziness, or hypoglycemic symptoms).
+
+Dr. Sunita Rao, MD
+Apollo Multispecialty Clinic
+[Digital Signature Verified]

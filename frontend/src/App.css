@@ -1,0 +1,4 @@
+/* App-specific custom utility classes */
+.app-container {
+  min-height: 100vh;
+}

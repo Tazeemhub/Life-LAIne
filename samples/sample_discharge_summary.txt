@@ -1,0 +1,61 @@
+MANIPAL HOSPITALS - WHITEFIELD
+Department of Pulmonology & Critical Care
+Whitefield Main Road, Bangalore, Karnataka - 560066
+
+================================================================================
+INPATIENT DISCHARGE SUMMARY
+================================================================================
+
+PATIENT IDENTIFICATION:
+Patient Name: Rajesh Kumar               IP Number: IP-2026-04182
+Age / Gender: 52 Years / Male           UHID: MH-8821039
+Admission Date: 2026-02-18 10:15 AM      Discharge Date: 2026-02-21 02:00 PM
+Consultant: Dr. Vikram Deshmukh, MD, DM (Pulmonology)
+
+FINAL DIAGNOSES:
+1. Acute Exacerbation of Bronchitis with Bronchospasm
+2. Pre-existing Type 2 Diabetes Mellitus
+3. Mild Systemic Hypertension
+
+CHIEF COMPLAINTS AT ADMISSION:
+- Productive cough with yellowish sputum for 5 days
+- Progressive shortness of breath on exertion (mMRC Grade II)
+- Low-grade fever (100.4°F) for 3 days
+- Chest tightness and nocturnal wheezing
+
+HOSPITAL COURSE & TREATMENT SUMMARY:
+Patient presented with dyspnea and productive cough. Chest X-Ray on admission
+demonstrated bilateral peribronchial cuffing without focal consolidation or pleural effusion.
+He was treated with intravenous bronchodilators, short course IV Hydrocortisone,
+nebulization (Levosalbutamol + Ipratropium), and empirical antibiotic therapy
+(Azithromycin 500mg IV OD for 3 days). Glycemic levels were monitored and managed
+with regular insulin sliding scale during the acute steroid phase.
+Patient responded well with clinical resolution of bronchospasm, clear lung fields,
+and normal SpO2 (98% on room air). Afebrile for 48 hours prior to discharge.
+
+DISCHARGE MEDICATIONS:
+--------------------------------------------------------------------------------
+1. Tab. Cefuroxime Axetil 500 mg
+   - Dosage: 1 tablet twice daily (BD) after food for 5 more days (Total: 7 days)
+2. Inhaler Budesonide + Formoterol (200/6 mcg)
+   - Route: Metered Dose Inhaler with Spacer
+   - Dosage: 2 puffs twice daily for 30 days, then taper as per clinic review
+3. Tab. Montelukast 10 mg + Levocetirizine 5 mg
+   - Dosage: 1 tablet at bedtime (OD) for 14 days
+4. Resume baseline anti-diabetic and anti-hypertensive regimen (Metformin & Lisinopril)
+
+HOME CARE & WARNING SIGNS:
+- Continue steam inhalation twice daily.
+- Avoid exposure to dust, smoke, and cold air.
+- Seek immediate medical attention at Emergency if experiencing:
+  * Persistent high-grade fever (> 101°F)
+  * Increased shortness of breath at rest or drop in SpO2 < 94%
+  * Chest pain or hemoptysis (blood in sputum)
+
+FOLLOW-UP APPOINTMENT:
+Review with Dr. Vikram Deshmukh in Pulmonology OPD on February 28, 2026 at 11:00 AM.
+Repeat Peak Expiratory Flow Rate (PEFR) and spirometry scheduled.
+
+Prepared by: Dr. Rohit Verma, Resident Medical Officer
+Approved by: Dr. Vikram Deshmukh, Senior Consultant Pulmonologist
+================================================================================

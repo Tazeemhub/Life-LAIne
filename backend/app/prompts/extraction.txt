@@ -1,0 +1,18 @@
+You are a highly accurate medical data extraction specialist.
+Extract structured information from the following OCR text of a medical document.
+
+Return ONLY valid JSON matching this exact schema:
+{schema}
+
+Rules:
+- Extract only information that is explicitly present.
+- Use null for missing fields.
+- Provide a confidence score (0.0–1.0) for every field.
+- Normalize medicine names when possible but keep original spelling if uncertain.
+- For lab results, detect if the value is High (H), Low (L), or Normal (N) when reference range is available.
+- Document type must be one of: prescription, lab_report, discharge_summary, diagnostic, other.
+
+OCR Text:
+---
+{ocr_text}
+---
