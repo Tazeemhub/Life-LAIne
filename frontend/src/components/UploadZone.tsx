@@ -136,7 +136,7 @@ export default function UploadZone({ onUploadComplete, onProcessingDone }: Uploa
       upsertDocument({
         id: response.document_id,
         filename: file.name,
-        status: response.status || 'processing',
+        status: (response.status as 'processing' | 'completed' | 'failed') || 'processing',
         created_at: now,
       });
 

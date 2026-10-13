@@ -52,6 +52,7 @@ app.include_router(chat.router)
 
 
 @app.get("/health")
+@app.get("/api/health")
 async def health_check():
     """Basic health check endpoint."""
     try:
@@ -62,5 +63,7 @@ async def health_check():
 
 
 @app.get("/")
+@app.get("/api")
 async def root():
     return {"message": "Health Copilot API", "docs": "/docs"}
+

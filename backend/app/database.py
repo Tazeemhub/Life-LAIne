@@ -17,23 +17,33 @@ def get_effective_db_url() -> str:
         is_readonly = not os.access(".", os.W_OK)
         if is_serverless or is_readonly:
             tmp_db = Path("/tmp/healthcopilot.db")
-            if not tmp_db.exists():
+            try:
+                tmp_db.parent.mkdir(parents=True, exist_ok=True)
+            except Exception:
+                pass
+            if not tmp_db.exists() or tmp_db.stat().st_size == 0:
                 # Attempt to copy seed database so existing patients/data are preserved
                 candidates = [
                     Path("healthcopilot.db"),
                     Path("backend/healthcopilot.db"),
+                    Path(__file__).resolve().parent.parent / "healthcopilot.db",
                     Path(__file__).resolve().parent.parent.parent / "healthcopilot.db",
                 ]
                 for c in candidates:
-                    if c.exists():
+                    if c.exists() and c.stat().st_size > 0:
                         try:
-                            shutil.copy2(c, tmp_db)
+                            shutil.copyfile(c, tmp_db)
+                            try:
+                                os.chmod(tmp_db, 0o666)
+                            except Exception:
+                                pass
                             logger.info(f"Copied initial SQLite database from {c} to {tmp_db}")
                             break
                         except Exception as e:
                             logger.warning(f"Failed to copy initial database: {e}")
-            return f"sqlite+aiosqlite:///{tmp_db}"
+            return f"sqlite+aiosqlite:///{tmp_db.as_posix()}"
     return db_url
+
 
 effective_db_url = get_effective_db_url()
 is_sqlite = "sqlite" in effective_db_url

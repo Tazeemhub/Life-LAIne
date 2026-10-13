@@ -81,7 +81,7 @@ export default function TimelineComponent({ events }: Props) {
 
 function groupByDate(events: TimelineEvent[]): Record<string, TimelineEvent[]> {
   const sorted = [...events].sort(
-    (a, b) => new Date(b.event_date).getTime() - new Date(a.event_date).getTime()
+    (a, b) => new Date(b.event_date || 0).getTime() - new Date(a.event_date || 0).getTime()
   );
   return sorted.reduce<Record<string, TimelineEvent[]>>((acc, e) => {
     const k = e.event_date || 'unknown';
