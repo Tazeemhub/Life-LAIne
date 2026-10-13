@@ -1,1 +1,11 @@
--r backend/requirements.txt
+# Keep the Vercel serverless function small. The Docker deployment uses the
+# complete dependency set in backend/requirements.txt.
+fastapi>=0.111.0
+pydantic>=2.7.0
+pydantic-settings>=2.2.0
+sqlalchemy>=2.0.30
+greenlet>=3.0.0
+aiosqlite>=0.20.0
+python-multipart>=0.0.9
+google-genai>=2.29.0
+PyJWT>=2.8.0
